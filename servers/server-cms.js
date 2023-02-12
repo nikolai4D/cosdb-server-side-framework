@@ -6,6 +6,8 @@ const cms = express();
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
 cms.use(express.static(path.join(__dirname, "/../../../node_modules/cosdb-client-framework/cms")));
+cms.use(express.static(path.join(__dirname, "/../../../node_modules/cosdb-client-framework/core")));
+cms.use(express.static(path.join(__dirname, "/../../../node_modules/cosdb-client-framework/components")));
 
 cms.get("/read", (req, res) => {
   fs.readFile(path.join(__dirname, "/../../../model.json"), "utf-8", (error, data) => {
