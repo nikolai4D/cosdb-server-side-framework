@@ -5,12 +5,11 @@ const cms = express();
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
-
-cms.use(express.static(path.join(__dirname, "/app/_ff/cms")));
+cms.use(express.static(path.join(__dirname, "/../../../node_modules/cosdb-client-framework/cms")));
 
 cms.get("/read", (req, res) => {
-  fs.readFile("./app/model.json", "utf-8", (error, data) => {
-    if (error) {
+  fs.readFile(path.join(__dirname, "/../../../model.json"), "utf-8", (error, data) => {
+    if (error) {  
       console.error("An error occurred while reading the file:", error);
       res.sendStatus(500);
     } else {
@@ -21,7 +20,7 @@ cms.get("/read", (req, res) => {
 
 cms.put("/update", (req, res) => {
   const data = req.body;
-  fs.writeFile("./app/model.json", JSON.stringify(data), (error) => {
+  fs.writeFile(path.join(__dirname, "/../../../model.json"), JSON.stringify(data), (error) => {
     if (error) {
       res
         .status(500)
