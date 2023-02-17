@@ -63,7 +63,7 @@ cms.get("/componentsdir", (req, res) => {
   console.log("componentsdir called");
   const directoryPath = path.join(
     __dirname,
-    "/../../../node_modules/cosdb-client-framework/components/"
+    "/../../../node_modules/cosdb-client-framework/components/viewTemplates"
   );
   try {
     const files = fs.readdirSync(directoryPath);
