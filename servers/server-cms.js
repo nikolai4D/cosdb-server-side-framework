@@ -59,7 +59,7 @@ cms.put("/update", (req, res) => {
   );
 });
 
-app.get("/dir", (req, res) => {
+cms.get("/dir", (req, res) => {
   const directoryPath = req.query.path;
 
   if (!directoryPath) {
