@@ -59,7 +59,7 @@ cms.put("/update", (req, res) => {
   );
 });
 
-cms.get("/componentsdir", (req, res) => {
+cms.get("/componentsdir/:type", (req, res) => {
   console.log("componentsdir called");
   const directoryPath = path.join(
     __dirname,
