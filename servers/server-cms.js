@@ -59,13 +59,12 @@ cms.put("/update", (req, res) => {
   );
 });
 
-cms.get("/dir", (req, res) => {
-  const directoryPath = path.join(__dirname, req.query.path);
-
-  if (!directoryPath) {
-    return res.status(400).json({ message: "Path is required" });
-  }
-
+cms.get("/componentsdir", (req, res) => {
+  const directoryPath = path.join(
+    __dirname,
+    "/../../../node_modules/cosdb-client-framework/components/",
+    req.query.path
+  );
   try {
     const files = fs.readdirSync(directoryPath, { withFileTypes: true });
     const result = files.map((file) => {
