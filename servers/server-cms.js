@@ -85,11 +85,8 @@ cms.get("/components/:type", (req, res) => {
   );
   try {
      const fileNames = fs.readdirSync(directoryPath).map(file => file.split(".")[0])
-    
-    console.log(fileNames)
 
-    res.status(200).json( {fileNames} );
-
+    res.status(200).json(fileNames);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error reading directory" });
