@@ -59,6 +59,39 @@ cms.put("/update", (req, res) => {
   );
 });
 
+app.get("/dir", (req, res) => {
+  const directoryPath = req.query.path;
+
+  if (!directoryPath) {
+    return res.status(400).json({ message: "Path is required" });
+  }
+
+  try {
+    const files = fs.readdirSync(directoryPath, { withFileTypes: true });
+    const result = files.map((file) => {
+      const filePath = path.join(directoryPath, file.name);
+      if (file.isDirectory()) {
+        return {
+          name: file.name,
+          type: "directory",
+          children: fs
+            .readdirSync(filePath)
+            .map((child) => path.join(file.name, child)),
+        };
+      } else {
+        return {
+          name: file.name,
+          type: "file",
+        };
+      }
+    });
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error reading directory" });
+  }
+});
+
 cms.listen(3001, () => {
   console.log("cmsServer is listening on port 3001");
 });

@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nikolai4D/cosdb-server-side-framework/issues"
   },
-  "homepage": "https://github.com/nikolai4D/cosdb-server-side-framework#readme"
+  "homepage": "https://github.com/nikolai4D/cosdb-server-side-framework#readme",
+  "dependencies": {
+    "uuid": "^9.0.0"
+  }
 }
