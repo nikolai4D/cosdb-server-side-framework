@@ -66,8 +66,11 @@ cms.get("/componentsdir", (req, res) => {
     "/../../../node_modules/cosdb-client-framework/components/"
   );
   try {
-    // const files = fs.readdirSync(directoryPath);
+    const files = fs.readdirSync(directoryPath);
     // res.json(JSON.parse(files));
+    console.log({directoryPath})
+    console.log({files})
+
     res.status(200).json({ message: "Hello" });
 
   } catch (err) {
