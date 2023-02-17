@@ -76,7 +76,7 @@ cms.get("/componentsdir", (req, res) => {
   }
 });
 
-cms.get("/components/:type", (req, res) => {
+cms.get("/componentsdir/:type", (req, res) => {
   const type = req.params.type;
   console.log(`components of type ${type} called`);
   const directoryPath = path.join(
@@ -84,7 +84,9 @@ cms.get("/components/:type", (req, res) => {
     `/../../../node_modules/cosdb-client-framework/components/${type}`
   );
   try {
-     const fileNames = fs.readdirSync(directoryPath).map(file => file.split(".")[0])
+
+    let files = path.parse(files)
+     const fileNames = fs.readdirSync(directoryPath).map(file => {return {file, name: file.split(".")[0]} })
 
     res.status(200).json(fileNames);
   } catch (err) {
