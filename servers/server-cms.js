@@ -84,7 +84,7 @@ cms.get("/components/:type", (req, res) => {
     `/../../../node_modules/cosdb-client-framework/components/${type}`
   );
   try {
-    const files = fs.readdirSync(directoryPath, (err, files) => {
+    const filesNames = fs.readdirSync(directoryPath, (err, files) => {
       if (err) {
         console.error(err);
         return;
@@ -95,14 +95,14 @@ cms.get("/components/:type", (req, res) => {
       });
     });
     
-    console.log(files)
+    console.log(filesNames)
 
-    res.status(200).json( files );
+    res.status(200).json( {filesNames} );
 
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error reading directory" });
-  }
+  } 
 });
 
 cms.listen(3001, () => {
