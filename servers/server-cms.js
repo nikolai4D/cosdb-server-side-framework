@@ -60,7 +60,7 @@ cms.put("/update", (req, res) => {
 });
 
 cms.get("/dir", (req, res) => {
-  const directoryPath = req.query.path;
+  const directoryPath = path.join(__dirname, req.query.path);
 
   if (!directoryPath) {
     return res.status(400).json({ message: "Path is required" });
