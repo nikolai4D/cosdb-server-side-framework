@@ -71,7 +71,7 @@ cms.get("/componentsdir", (req, res) => {
     console.log({directoryPath})
     console.log({files})
 
-    res.status(200).json({ message: "Hello" });
+    res.status(200).json( files );
 
   } catch (err) {
     console.error(err);
