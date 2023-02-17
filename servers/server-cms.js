@@ -62,29 +62,11 @@ cms.put("/update", (req, res) => {
 cms.get("/componentsdir", (req, res) => {
   const directoryPath = path.join(
     __dirname,
-    "/../../../node_modules/cosdb-client-framework/components/",
-    req.query.path
+    "/../../../node_modules/cosdb-client-framework/components/"
   );
   try {
-    const files = fs.readdirSync(directoryPath, { withFileTypes: true });
-    const result = files.map((file) => {
-      const filePath = path.join(directoryPath, file.name);
-      if (file.isDirectory()) {
-        return {
-          name: file.name,
-          type: "directory",
-          children: fs
-            .readdirSync(filePath)
-            .map((child) => path.join(file.name, child)),
-        };
-      } else {
-        return {
-          name: file.name,
-          type: "file",
-        };
-      }
-    });
-    res.json(result);
+    const files = fs.readdirSync(directoryPath);
+    res.json(JSON.parse(files));
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error reading directory" });
