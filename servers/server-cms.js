@@ -59,20 +59,22 @@ cms.put("/update", (req, res) => {
   );
 });
 
-// cms.get("/componentsdir", (req, res) => {
-//   console.log("componentsdir called");
-//   const directoryPath = path.join(
-//     __dirname,
-//     "/../../../node_modules/cosdb-client-framework/components/"
-//   );
-//   try {
-//     const files = fs.readdirSync(directoryPath);
-//     res.json(JSON.parse(files));
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).json({ message: "Error reading directory" });
-//   }
-// });
+cms.get("/componentsdir", (req, res) => {
+  console.log("componentsdir called");
+  const directoryPath = path.join(
+    __dirname,
+    "/../../../node_modules/cosdb-client-framework/components/"
+  );
+  try {
+    // const files = fs.readdirSync(directoryPath);
+    // res.json(JSON.parse(files));
+    res.status(200).json({ message: "Hello" });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Error reading directory" });
+  }
+});
 
 cms.listen(3001, () => {
   console.log("cmsServer is listening on port 3001");
