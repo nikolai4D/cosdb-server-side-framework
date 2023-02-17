@@ -84,21 +84,11 @@ cms.get("/components/:type", (req, res) => {
     `/../../../node_modules/cosdb-client-framework/components/${type}`
   );
   try {
-    const filesNames = []
-    fs.readdirSync(directoryPath, (err, files) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-      files.forEach(file => {
-        filesNames.push(path.parse(file).name)
-        
-      });
-    });
+     const fileNames = fs.readdirSync(directoryPath).map(file => file.split(".")[0])
     
-    console.log(filesNames)
+    console.log(fileNames)
 
-    res.status(200).json( {filesNames} );
+    res.status(200).json( {fileNames} );
 
   } catch (err) {
     console.error(err);
