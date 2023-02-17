@@ -85,7 +85,7 @@ cms.get("/componentsdir/:type", (req, res) => {
   );
   try {
 
-     const fileNames = fs.readdirSync(directoryPath).map(file => {return {file, name: file.split(".")[0]} })
+     const fileNames = fs.readdirSync(directoryPath).map(file => {return {file: path.parse(file), name: path.parse(file).name }})
 
     res.status(200).json(fileNames);
   } catch (err) {
