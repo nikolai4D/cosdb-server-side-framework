@@ -78,7 +78,6 @@ cms.get("/componentsdir", (req, res) => {
 
 cms.get("/components/:type", (req, res) => {
   const type = req.params.type;
-  console.log(`components of type ${type} called`);
   const directoryPath = path.join(
     __dirname,
     `/../../../node_modules/cosdb-client-framework/components/${type}`
