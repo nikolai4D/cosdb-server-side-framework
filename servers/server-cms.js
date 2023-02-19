@@ -29,7 +29,7 @@ cms.use(
 );
 
 cms.get("/getuuid", (req, res) => {
-  const newUuid = uuidv4();
+  const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
 });
 
