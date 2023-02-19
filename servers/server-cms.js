@@ -2,6 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cms = express();
+const { v4: uuidv4 } = require("uuid");
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -26,6 +27,11 @@ cms.use(
     )
   )
 );
+
+cms.get("/getuuid", (req, res) => {
+  const newUuid = uuidv4();
+  res.send(newUuid);
+});
 
 cms.get("/read", (req, res) => {
   fs.readFile(
@@ -67,9 +73,8 @@ cms.get("/componentsdir", (req, res) => {
   );
   try {
     const files = fs.readdirSync(directoryPath);
-    console.log({files})
-    res.status(200).json( files );
-
+    console.log({ files });
+    res.status(200).json(files);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error reading directory" });
@@ -84,14 +89,15 @@ cms.get("/componentsdir/:type", (req, res) => {
     `/../../../node_modules/cosdb-client-framework/components/${type}`
   );
   try {
-
-     const fileNames = fs.readdirSync(directoryPath).map(file => {return {file, name: file.split(".")[0]} })
+    const fileNames = fs.readdirSync(directoryPath).map((file) => {
+      return { file, name: file.split(".")[0] };
+    });
 
     res.status(200).json(fileNames);
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: "Error reading directory" });
-  } 
+  }
 });
 
 cms.listen(3001, () => {
