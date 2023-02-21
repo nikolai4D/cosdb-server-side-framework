@@ -28,6 +28,16 @@ cms.use(
   )
 );
 
+cms.use(
+  "/components",
+  express.static(
+    path.join(
+      __dirname,
+      "/../../../node_modules/cosdb-client-framework/data-mgmt"
+    )
+  )
+);
+
 cms.get("/getuuid", (req, res) => {
   const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
@@ -105,7 +115,7 @@ cms.get("/functions", (req, res) => {
   console.log(`functions directory called`);
   const directoryPath = path.join(
     __dirname,
-    `/../../../node_modules/cosdb-client-framework/functions`
+    `/../../../node_modules/cosdb-client-framework/data-mgmt/actions`
   );
   try {
     const fileNames = fs.readdirSync(directoryPath).map((file) => {
