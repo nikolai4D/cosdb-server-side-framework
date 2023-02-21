@@ -100,11 +100,6 @@ cms.get("/componentsdir/:type", (req, res) => {
   }
 });
 
-cms.listen(3001, () => {
-  console.log("cmsServer is listening on port 3001");
-});
-
-
 cms.get("/functions", (req, res) => {
 
   console.log(`functions directory called`);
@@ -124,7 +119,7 @@ cms.get("/functions", (req, res) => {
   }
 });
 
+
 cms.listen(3001, () => {
   console.log("cmsServer is listening on port 3001");
 });
-
