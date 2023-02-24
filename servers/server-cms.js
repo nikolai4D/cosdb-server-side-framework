@@ -3,6 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
+const { promisify } = require('util');
+
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -38,7 +40,7 @@ cms.use(
   )
 );
 
-cms.get("/getuuid", (req, res) => {
+cms.get("/getuuid", async(req, res) => {
   const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
 });
@@ -58,22 +60,59 @@ cms.get("/read", (req, res) => {
   );
 });
 
-cms.put("/update", (req, res) => {
+
+
+cms.put("/update", async (req, res) => {
   const data = req.body;
-  fs.writeFile(
-    path.join(__dirname, "/../../../model.json"),
-    JSON.stringify(data, null, 4),
-    (error) => {
-      if (error) {
-        res
-          .status(500)
-          .send({ message: "An error occurred while saving the file." });
-      } else {
-        res.send({ message: "The file has been successfully updated." });
-      }
+  const semaphore = new FileSemaphore();
+  const filePath = path.join(__dirname, "/../../../model.json");
+  const dataJSON = JSON.stringify(data, null, 4)
+  const writeFile = promisify(fs.writeFile);
+
+
+  async function writeToFile(filePath, data) {
+    await semaphore.acquire();
+    try {
+      await writeFile(filePath, data);
+    } finally {
+      semaphore.release();
     }
-  );
-});
+  }
+
+  try {
+    await writeToFile(filePath, dataJSON)
+    res.send({ message: "The file has been successfully updated." });
+  }
+  catch (error) {
+    res
+    .status(500)
+    .send({ message: "An error occurred while saving the file." });
+    }
+
+})
+
+
+function FileSemaphore() {
+  this.count = 1;
+  this.waitingList = [];
+
+  this.acquire = async function() {
+    this.count--;
+    if (this.count < 0) {
+      await new Promise(resolve => {
+        this.waitingList.push(resolve);
+      });
+    }
+  }
+
+  this.release = async function() {
+    this.count++;
+    if (this.count <= 0 && this.waitingList.length > 0) {
+      const next = this.waitingList.shift();
+      next();
+    }
+  }
+}
 
 cms.get("/componentsdir", (req, res) => {
   console.log("componentsdir called");
