@@ -74,8 +74,11 @@ cms.put("/update", async (req, res) => {
     await semaphore.acquire();
     try {
       await writeFile(filePath, data);
+      console.log("writing to file")
     } finally {
       semaphore.release();
+      console.log("Releasing semaphore")
+
     }
   }
 
