@@ -4,15 +4,8 @@ const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
 const { promisify } = require('util');
-const FileSemaphore  = require('./helpers/FileSemaphore.js');
+const Semaphore  = require('./helpers/Semaphore.js');
 
-// module.exports = Person;
-
-//index.js
-// var Person = require('./module.js');
-// var person = new Person('John');
-
-// person.sayName();
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -72,20 +65,20 @@ cms.get("/read", (req, res) => {
 
 cms.put("/update", async (req, res) => {
   const data = req.body;
-  const semaphore = new FileSemaphore();
+  const fileSemaphore = new Semaphore();
   const filePath = path.join(__dirname, "/../../../model.json");
   const dataJSON = JSON.stringify(data, null, 4)
   const writeFile = promisify(fs.writeFile);
 
 
   async function writeToFile(filePath, data) {
-    await semaphore.acquire();
+    await fileSemaphore.acquire();
     try {
       await writeFile(filePath, data);
       console.log("writing to file")
     } finally {
-      semaphore.release();
-      console.log("Releasing semaphore")
+      fileSemaphore.release();
+      console.log("Releasing fileSemaphore")
 
     }
   }
