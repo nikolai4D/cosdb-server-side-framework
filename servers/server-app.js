@@ -12,8 +12,10 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 
 app.get('*', function(req, res, next) {
-    res.sendFile(path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html"), { root: 'dist' });
+    res.sendFile("index.html", { root: 'dist' });
 })
+
+// path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
