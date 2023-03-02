@@ -15,7 +15,22 @@ app.use(
   )
 );
 
+cms.use(
+  "/core",
+  express.static(
+    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/core")
+  )
+);
 
+cms.use(
+  "/components",
+  express.static(
+    path.join(
+      __dirname,
+      "/../../../node_modules/cosdb-client-framework/components"
+    )
+  )
+);
 // app.get('*', function(req, res, next) {
 //     res.sendFile("index.html", { root: 'dist' });
 // })
