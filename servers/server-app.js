@@ -15,14 +15,14 @@ app.use(
   )
 );
 
-cms.use(
+app.use(
   "/core",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/core")
   )
 );
 
-cms.use(
+app.use(
   "/components",
   express.static(
     path.join(
