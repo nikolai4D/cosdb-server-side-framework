@@ -5,7 +5,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static(path.join(__dirname, "/app")));
+// app.use(express.static(path.join(__dirname, "/app")));
+
+app.use(
+  "/",
+  express.static(
+    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate")
+  )
+);
 
 app.listen(3000, () => {
   console.log("server is listening on port 3000");
