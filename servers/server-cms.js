@@ -4,6 +4,7 @@ const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
 const { promisify } = require('util');
+const helper  = require('./helpers/FileSemaphore');
 
 
 cms.use(express.json());
@@ -64,7 +65,7 @@ cms.get("/read", (req, res) => {
 
 cms.put("/update", async (req, res) => {
   const data = req.body;
-  const semaphore = new FileSemaphore();
+  const semaphore = new helper.FileSemaphore();
   const filePath = path.join(__dirname, "/../../../model.json");
   const dataJSON = JSON.stringify(data, null, 4)
   const writeFile = promisify(fs.writeFile);
@@ -95,27 +96,6 @@ cms.put("/update", async (req, res) => {
 })
 
 
-function FileSemaphore() {
-  this.count = 1;
-  this.waitingList = [];
-
-  this.acquire = async function() {
-    this.count--;
-    if (this.count < 0) {
-      await new Promise(resolve => {
-        this.waitingList.push(resolve);
-      });
-    }
-  }
-
-  this.release = async function() {
-    this.count++;
-    if (this.count <= 0 && this.waitingList.length > 0) {
-      const next = this.waitingList.shift();
-      next();
-    }
-  }
-}
 
 cms.get("/componentsdir", (req, res) => {
   console.log("componentsdir called");
