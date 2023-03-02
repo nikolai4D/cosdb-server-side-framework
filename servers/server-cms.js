@@ -4,8 +4,15 @@ const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
 const { promisify } = require('util');
-const helper  = require('./helpers/FileSemaphore');
+const FileSemaphore  = require('./helpers/FileSemaphore.js');
 
+// module.exports = Person;
+
+//index.js
+// var Person = require('./module.js');
+// var person = new Person('John');
+
+// person.sayName();
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -65,7 +72,7 @@ cms.get("/read", (req, res) => {
 
 cms.put("/update", async (req, res) => {
   const data = req.body;
-  const semaphore = new helper.FileSemaphore();
+  const semaphore = new FileSemaphore();
   const filePath = path.join(__dirname, "/../../../model.json");
   const dataJSON = JSON.stringify(data, null, 4)
   const writeFile = promisify(fs.writeFile);

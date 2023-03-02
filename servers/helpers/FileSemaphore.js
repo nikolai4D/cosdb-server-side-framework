@@ -1,4 +1,4 @@
-module.exports = function FileSemaphore() {
+function FileSemaphore() {
     this.count = 1;
     this.waitingList = [];
   
@@ -19,4 +19,5 @@ module.exports = function FileSemaphore() {
       }
     }
   }
-  
+
+module.exports = FileSemaphore;
