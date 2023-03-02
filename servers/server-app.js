@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(
-  "/app",
+  "/",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate")
   )
