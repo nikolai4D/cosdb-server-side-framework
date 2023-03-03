@@ -17,10 +17,18 @@ app.use(
   )
 );
 
-app.get(
-  "/model",
-  express.static(
-    path.join(__dirname, "model.json")
+app.get("/read", (req, res) => {
+  fs.readFile(
+    path.join(__dirname, "/../../../model.json"),
+    "utf-8",
+    (error, data) => {
+      if (error) {
+        console.error("An error occurred while reading the file:", error);
+        res.sendStatus(500);
+      } else {
+        res.json(JSON.parse(data));
+      }
+    }
   )
 );
 
