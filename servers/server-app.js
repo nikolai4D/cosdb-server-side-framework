@@ -30,7 +30,7 @@ app.get("/read", (req, res) => {
       }
     }
   )
-);
+  });
 
 
 
