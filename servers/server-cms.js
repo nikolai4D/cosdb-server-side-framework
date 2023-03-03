@@ -4,23 +4,26 @@ const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
 const { promisify } = require('util');
-const Semaphore  = require('./helpers/Semaphore.js');
+// const Semaphore  = require('./helpers/Semaphore.js');
 
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
+
 cms.use(
   "/cms",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/cms")
   )
 );
+
 cms.use(
   "/core",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/core")
   )
 );
+
 cms.use(
   "/components",
   express.static(
@@ -61,7 +64,27 @@ cms.get("/read", (req, res) => {
   );
 });
 
+function Semaphore() {
+  this.count = 1;
+  this.waitingList = [];
 
+  this.acquire = async function() {
+    this.count--;
+    if (this.count < 0) {
+      await new Promise(resolve => {
+        this.waitingList.push(resolve);
+      });
+    }
+  }
+
+  this.release = async function() {
+    this.count++;
+    if (this.count <= 0 && this.waitingList.length > 0) {
+      const next = this.waitingList.shift();
+      next();
+    }
+  }
+}
 
 cms.put("/update", async (req, res) => {
   const data = req.body;
@@ -69,7 +92,6 @@ cms.put("/update", async (req, res) => {
   const filePath = path.join(__dirname, "/../../../model.json");
   const dataJSON = JSON.stringify(data, null, 4)
   const writeFile = promisify(fs.writeFile);
-
 
   async function writeToFile(filePath, data) {
     await fileSemaphore.acquire();
