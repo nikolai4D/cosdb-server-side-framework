@@ -8,12 +8,23 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+
 app.use(
   "/",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate")
   )
 );
+
+app.use(
+  "/",
+  express.static(
+    path.join(__dirname, "./model.json")
+  )
+);
+
+
 
 app.use(
   "/core",
@@ -31,6 +42,9 @@ app.use(
     )
   )
 );
+
+
+
 // app.get('*', function(req, res, next) {
 //     res.sendFile("index.html", { root: 'dist' });
 // })
