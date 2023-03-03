@@ -3,6 +3,9 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
+const { promisify } = require('util');
+const Semaphore  = require('./helpers/Semaphore.js');
+
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -38,7 +41,7 @@ cms.use(
   )
 );
 
-cms.get("/getuuid", (req, res) => {
+cms.get("/getuuid", async(req, res) => {
   const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
 });
@@ -58,22 +61,41 @@ cms.get("/read", (req, res) => {
   );
 });
 
-cms.put("/update", (req, res) => {
+
+
+cms.put("/update", async (req, res) => {
   const data = req.body;
-  fs.writeFile(
-    path.join(__dirname, "/../../../model.json"),
-    JSON.stringify(data, null, 4),
-    (error) => {
-      if (error) {
-        res
-          .status(500)
-          .send({ message: "An error occurred while saving the file." });
-      } else {
-        res.send({ message: "The file has been successfully updated." });
-      }
+  const fileSemaphore = new Semaphore();
+  const filePath = path.join(__dirname, "/../../../model.json");
+  const dataJSON = JSON.stringify(data, null, 4)
+  const writeFile = promisify(fs.writeFile);
+
+
+  async function writeToFile(filePath, data) {
+    await fileSemaphore.acquire();
+    try {
+      await writeFile(filePath, data);
+      console.log("writing to file")
+    } finally {
+      fileSemaphore.release();
+      console.log("Releasing fileSemaphore")
+
     }
-  );
-});
+  }
+
+  try {
+    await writeToFile(filePath, dataJSON)
+    res.send({ message: "The file has been successfully updated." });
+  }
+  catch (error) {
+    res
+    .status(500)
+    .send({ message: "An error occurred while saving the file." });
+    }
+
+})
+
+
 
 cms.get("/componentsdir", (req, res) => {
   console.log("componentsdir called");
