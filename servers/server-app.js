@@ -20,7 +20,7 @@ app.use(
 app.use(
   "/",
   express.static(
-    path.join(__dirname, "./model.json")
+    path.join(__dirname, "model.json")
   )
 );
 
