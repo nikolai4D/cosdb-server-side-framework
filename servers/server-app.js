@@ -29,9 +29,8 @@ app.get("/read", (req, res) => {
         res.json(JSON.parse(data));
       }
     }
-  )
-  });
-
+  );
+});
 
 
 app.use(
