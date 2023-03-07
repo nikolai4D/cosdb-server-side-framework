@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "cdev": "git add . && git commit -m \"auto commit to dev\" && git push origin dev"
+        "cdev": "git add . && git commit -m \"auto commit to CSFO-1-app-connect-router-to-app-and-show-components-from-model-json\" && git push origin CSFO-1-app-connect-router-to-app-and-show-components-from-model-json"
     },
     "repository": {
         "type": "git",
