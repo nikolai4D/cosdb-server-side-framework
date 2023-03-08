@@ -64,81 +64,81 @@ cms.get("/read", (req, res) => {
   );
 });
 
-function Semaphore() {
-  this.count = 1;
-  this.waitingList = [];
+// function Semaphore() {
+//   this.count = 1;
+//   this.waitingList = [];
 
-  this.acquire = async function() {
-    this.count--;
-    if (this.count < 0) {
-      await new Promise(resolve => {
-        this.waitingList.push(resolve);
-      });
-    }
-  }
+//   this.acquire = async function() {
+//     this.count--;
+//     if (this.count < 0) {
+//       await new Promise(resolve => {
+//         this.waitingList.push(resolve);
+//       });
+//     }
+//   }
 
-  this.release = async function() {
-    this.count++;
-    if (this.count <= 0 && this.waitingList.length > 0) {
-      const next = this.waitingList.shift();
-      next();
-    }
-  }
-}
+//   this.release = async function() {
+//     this.count++;
+//     if (this.count <= 0 && this.waitingList.length > 0) {
+//       const next = this.waitingList.shift();
+//       next();
+//     }
+//   }
+// }
 
-cms.put("/update", async (req, res) => {
-  const data = req.body;
-  const semaphore = new FileSemaphore();
-  const filePath = path.join(__dirname, "/../../../model.json");
-  const dataJSON = JSON.stringify(data, null, 4)
-  const writeFile = promisify(fs.writeFile);
-
-
-  async function writeToFile(filePath, data) {
-    await semaphore.acquire();
-    try {
-      await writeFile(filePath, data);
-      console.log("writing to file")
-    } finally {
-      semaphore.release();
-      console.log("Releasing semaphore")
-
-    }
-  }
-
-  try {
-    await writeToFile(filePath, dataJSON)
-    res.send({ message: "The file has been successfully updated." });
-  }
-  catch (error) {
-    res
-    .status(500)
-    .send({ message: "An error occurred while saving the file." });
-    }
-
-})
+// cms.put("/update", async (req, res) => {
+//   const data = req.body;
+//   const semaphore = new FileSemaphore();
+//   const filePath = path.join(__dirname, "/../../../model.json");
+//   const dataJSON = JSON.stringify(data, null, 4)
+//   const writeFile = promisify(fs.writeFile);
 
 
-function FileSemaphore() {
-  this.count = 1;
-  this.waitingList = [];
+//   async function writeToFile(filePath, data) {
+//     await semaphore.acquire();
+//     try {
+//       await writeFile(filePath, data);
+//       console.log("writing to file")
+//     } finally {
+//       semaphore.release();
+//       console.log("Releasing semaphore")
 
-  this.acquire = async function() {
-    this.count--;
-    if (this.count < 0) {
-      await new Promise(resolve => {
-        this.waitingList.push(resolve);
-      });
-    }
-  }
+//     }
+//   }
 
-  this.release = async function() {
-    this.count++;
-    if (this.count <= 0 && this.waitingList.length > 0) {
-      const next = this.waitingList.shift();
-      next();
-    }
-  }
+//   try {
+//     await writeToFile(filePath, dataJSON)
+//     res.send({ message: "The file has been successfully updated." });
+//   }
+//   catch (error) {
+//     res
+//     .status(500)
+//     .send({ message: "An error occurred while saving the file." });
+//     }
+
+// })
+
+
+// function FileSemaphore() {
+//   this.count = 1;
+//   this.waitingList = [];
+
+//   this.acquire = async function() {
+//     this.count--;
+//     if (this.count < 0) {
+//       await new Promise(resolve => {
+//         this.waitingList.push(resolve);
+//       });
+//     }
+//   }
+
+//   this.release = async function() {
+//     this.count++;
+//     if (this.count <= 0 && this.waitingList.length > 0) {
+//       const next = this.waitingList.shift();
+//       next();
+//     }
+//   }
 }
 
 cms.get("/componentsdir", (req, res) => {
