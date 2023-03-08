@@ -3,9 +3,8 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
-const { promisify } = require('util');
+const { promisify } = require("util");
 // const Semaphore  = require('./helpers/Semaphore.js');
-
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -44,7 +43,7 @@ cms.use(
   )
 );
 
-cms.get("/getuuid", async(req, res) => {
+cms.get("/getuuid", async (req, res) => {
   const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
 });
@@ -93,7 +92,6 @@ cms.get("/read", (req, res) => {
 //   const dataJSON = JSON.stringify(data, null, 4)
 //   const writeFile = promisify(fs.writeFile);
 
-
 //   async function writeToFile(filePath, data) {
 //     await semaphore.acquire();
 //     try {
@@ -118,7 +116,6 @@ cms.get("/read", (req, res) => {
 
 // })
 
-
 // function FileSemaphore() {
 //   this.count = 1;
 //   this.waitingList = [];
@@ -139,7 +136,7 @@ cms.get("/read", (req, res) => {
 //       next();
 //     }
 //   }
-}
+// }
 
 cms.get("/componentsdir", (req, res) => {
   console.log("componentsdir called");
@@ -177,7 +174,6 @@ cms.get("/componentsdir/:type", (req, res) => {
 });
 
 cms.get("/functions", (req, res) => {
-
   console.log(`functions directory called`);
   const directoryPath = path.join(
     __dirname,
@@ -194,7 +190,6 @@ cms.get("/functions", (req, res) => {
     res.status(500).json({ message: "Error reading directory" });
   }
 });
-
 
 cms.listen(3001, () => {
   console.log("cmsServer is listening on port 3001");
