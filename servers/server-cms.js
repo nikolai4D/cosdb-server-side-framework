@@ -141,6 +141,7 @@ cms.get("/read", (req, res) => {
 cms.put("/update", async (req, res) => {
   try {
     const data = req.body;
+    console.log("data: ", data);
     await fs.promises.writeFile(
       path.join(__dirname, "/../../../model.json"),
       JSON.stringify(data, null, 4)
