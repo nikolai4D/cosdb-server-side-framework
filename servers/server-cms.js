@@ -138,21 +138,20 @@ cms.get("/read", (req, res) => {
 //   }
 // }
 
-cms.put("/update", (req, res) => {
-  const data = req.body;
-  fs.writeFile(
-    path.join(__dirname, "/../../../model.json"),
-    JSON.stringify(data, null, 4),
-    (error) => {
-      if (error) {
-        res
-          .status(500)
-          .send({ message: "An error occurred while saving the file." });
-      } else {
-        res.send({ message: "The file has been successfully updated." });
-      }
-    }
-  );
+cms.put("/update", async (req, res) => {
+  try {
+    const data = req.body;
+    await fs.promises.writeFile(
+      path.join(__dirname, "/../../../model.json"),
+      JSON.stringify(data, null, 4)
+    );
+    res.send({ data, message: "The file has been successfully updated." });
+  } catch (error) {
+    console.error(error);
+    res
+      .status(500)
+      .send({ message: "An error occurred while saving the file." });
+  }
 });
 
 cms.get("/componentsdir", (req, res) => {
