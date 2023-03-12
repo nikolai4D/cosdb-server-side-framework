@@ -49,94 +49,17 @@ cms.get("/getuuid", async (req, res) => {
 });
 
 cms.get("/read", (req, res) => {
-  fs.readFile(
-    path.join(__dirname, "/../../../model.json"),
-    "utf-8",
-    (error, data) => {
-      if (error) {
-        console.error("An error occurred while reading the file:", error);
-        res.sendStatus(500);
-      } else {
-        res.json(JSON.parse(data));
-      }
-    }
-  );
+  try {
+    const data = fs.readFileSync(
+      path.join(__dirname, "/../../../model.json"),
+      "utf-8"
+    );
+    res.json(JSON.parse(data));
+  } catch (error) {
+    console.error("An error occurred while reading the file:", error);
+    res.sendStatus(500);
+  }
 });
-
-// function Semaphore() {
-//   this.count = 1;
-//   this.waitingList = [];
-
-//   this.acquire = async function() {
-//     this.count--;
-//     if (this.count < 0) {
-//       await new Promise(resolve => {
-//         this.waitingList.push(resolve);
-//       });
-//     }
-//   }
-
-//   this.release = async function() {
-//     this.count++;
-//     if (this.count <= 0 && this.waitingList.length > 0) {
-//       const next = this.waitingList.shift();
-//       next();
-//     }
-//   }
-// }
-
-// cms.put("/update", async (req, res) => {
-//   const data = req.body;
-//   const semaphore = new FileSemaphore();
-//   const filePath = path.join(__dirname, "/../../../model.json");
-//   const dataJSON = JSON.stringify(data, null, 4)
-//   const writeFile = promisify(fs.writeFile);
-
-//   async function writeToFile(filePath, data) {
-//     await semaphore.acquire();
-//     try {
-//       await writeFile(filePath, data);
-//       console.log("writing to file")
-//     } finally {
-//       semaphore.release();
-//       console.log("Releasing semaphore")
-
-//     }
-//   }
-
-//   try {
-//     await writeToFile(filePath, dataJSON)
-//     res.send({ message: "The file has been successfully updated." });
-//   }
-//   catch (error) {
-//     res
-//     .status(500)
-//     .send({ message: "An error occurred while saving the file." });
-//     }
-
-// })
-
-// function FileSemaphore() {
-//   this.count = 1;
-//   this.waitingList = [];
-
-//   this.acquire = async function() {
-//     this.count--;
-//     if (this.count < 0) {
-//       await new Promise(resolve => {
-//         this.waitingList.push(resolve);
-//       });
-//     }
-//   }
-
-//   this.release = async function() {
-//     this.count++;
-//     if (this.count <= 0 && this.waitingList.length > 0) {
-//       const next = this.waitingList.shift();
-//       next();
-//     }
-//   }
-// }
 
 cms.put("/update", async (req, res) => {
   try {
