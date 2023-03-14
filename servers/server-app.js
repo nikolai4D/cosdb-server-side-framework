@@ -51,6 +51,17 @@ app.use(
   )
 );
 
+app.use(
+  "/data-mgmt",
+  express.static(
+    path.join(
+      __dirname,
+      "/../../../node_modules/cosdb-client-framework/data-mgmt"
+    )
+  )
+);
+
+
 
 
 // app.get('*', function(req, res, next) {
