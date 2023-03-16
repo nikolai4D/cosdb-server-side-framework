@@ -64,9 +64,10 @@ app.use(
 
 
 
-// app.get('*', function(req, res, next) {
-//     res.sendFile("index.html", { root: 'dist' });
-// })
+app.get('*', function(req, res, next) {
+    res.sendFile(    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html")
+    );
+})
 
 // path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/
 
