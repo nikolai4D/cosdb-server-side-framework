@@ -79,14 +79,12 @@ cms.put("/update", async (req, res) => {
 });
 
 cms.get("/componentsdir", (req, res) => {
-  //console.log("componentsdir called");
   const directoryPath = path.join(
     __dirname,
     "/../../../node_modules/cosdb-client-framework/components/"
   );
   try {
     const files = fs.readdirSync(directoryPath);
-    //console.log({ files });
     res.status(200).json(files);
   } catch (err) {
     console.error(err);
@@ -96,7 +94,6 @@ cms.get("/componentsdir", (req, res) => {
 
 cms.get("/componentsdir/:type", (req, res) => {
   const type = req.params.type;
-  //console.log(`components of type ${type} called`);
   const directoryPath = path.join(
     __dirname,
     `/../../../node_modules/cosdb-client-framework/components/${type}`
@@ -114,7 +111,6 @@ cms.get("/componentsdir/:type", (req, res) => {
 });
 
 cms.get("/functions", (req, res) => {
-  console.log(`functions directory called`);
   const directoryPath = path.join(
     __dirname,
     `/../../../node_modules/cosdb-client-framework/data-mgmt/actions`
