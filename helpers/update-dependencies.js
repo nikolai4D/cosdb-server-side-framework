@@ -1,14 +1,14 @@
 const fs = require("fs");
 const execSync = require("child_process").execSync;
 
-const backupFile = "../../../../package.json.backup";
+const backupFile = "../../../package.json.backup";
 
 function backupPackageJson() {
-  fs.copyFileSync("../../../../package.json", backupFile);
+  fs.copyFileSync("../../../package.json", backupFile);
 }
 
 function restorePackageJson() {
-  fs.copyFileSync(backupFile, "../../../../package.json");
+  fs.copyFileSync(backupFile, "../../../package.json");
   fs.unlinkSync(backupFile);
 }
 
@@ -17,7 +17,7 @@ function updateDependencies() {
     .toString()
     .trim();
 
-  const packageJson = require("../../../../package.json");
+  const packageJson = require("../../../package.json");
 
   packageJson.dependencies[
     "cosdb-client-framework"
@@ -27,7 +27,7 @@ function updateDependencies() {
   ] = `github:nikolai4D/cosdb-server-side-framework#${currentBranch}`;
 
   fs.writeFileSync(
-    "../../../../package.json",
+    "../../../package.json",
     JSON.stringify(packageJson, null, 4)
   );
 }
