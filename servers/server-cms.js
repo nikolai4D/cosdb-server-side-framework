@@ -3,8 +3,6 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
-const { promisify } = require("util");
-// const Semaphore  = require('./helpers/Semaphore.js');
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
