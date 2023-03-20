@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
-console.log("update-dependencies.js from server repo!");
+console.log("update-dependencies.js from server repo!!!");
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
