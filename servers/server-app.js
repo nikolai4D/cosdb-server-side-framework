@@ -64,7 +64,7 @@ app.use(
 
 
 // Api
-app.use("/api", require("../api/api.js"));
+app.use("/api", require("../api/routes.js"));
 
 
 
