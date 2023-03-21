@@ -5,7 +5,7 @@ const helpers = require("./helpers.js");
 
 
 router.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.json('Hello World!');
 });
 
 router.post('/users', (req, res) => {
