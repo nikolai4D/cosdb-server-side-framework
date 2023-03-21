@@ -42,6 +42,7 @@ app.use(
   )
 );
 
+
 app.use(
   "/components",
   express.static(
@@ -51,6 +52,7 @@ app.use(
     )
   )
 );
+
 
 app.use(
   "/data-mgmt",
@@ -69,7 +71,7 @@ app.use("/api", require("../api/routes.js"));
 
 
 app.get('*', function(req, res, next) {
-    res.sendFile(    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html")
+    res.sendFile( path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html")
     );
 })
 
