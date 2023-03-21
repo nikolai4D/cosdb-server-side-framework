@@ -62,6 +62,9 @@ app.use(
 );
 
 
+// Api
+app.use("/api", require("../api/api.js"));
+
 
 
 app.get('*', function(req, res, next) {
