@@ -11,6 +11,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+
 app.use(
   "/",
   express.static(
@@ -41,6 +42,7 @@ app.use(
   )
 );
 
+
 app.use(
   "/components",
   express.static(
@@ -50,6 +52,7 @@ app.use(
     )
   )
 );
+
 
 app.use(
   "/data-mgmt",
@@ -62,10 +65,13 @@ app.use(
 );
 
 
+// Api
+app.use("/api", require("../api/routes.js"));
+
 
 
 app.get('*', function(req, res, next) {
-    res.sendFile(    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html")
+    res.sendFile( path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/index.html")
     );
 })
 
