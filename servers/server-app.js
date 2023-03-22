@@ -75,7 +75,6 @@ app.get('*', function(req, res, next) {
     );
 })
 
-// path.join(__dirname, "/../../../node_modules/cosdb-client-framework/app-boilerplate/
 
 app.listen(3005, () => {
   console.log("server is listening on port 3005");
