@@ -3,7 +3,7 @@ const router = express.Router();
 const helpers = require("./helpers.js");
 require("dotenv").config();
 const { apiCallPost, apiCallGet, apiCallDelete } = require("./helpers");
-
+router.use(bodyParser.json());
 
 router.get('/getListData', async (req, res) => {
 
