@@ -10,8 +10,6 @@ router.post('/getListData', async (req, res) => {
   const type = req.body.body.toUpperCase()
   const url = process.env[type]
 
-  console.log(type.toUpperCase(), url)
-
   let response = await apiCallGet(url);
 
   if ((await response.status) !== 200) {
@@ -19,8 +17,6 @@ router.post('/getListData', async (req, res) => {
   } else {
       return res.json(response.data);
   }
-
-  // res.json('Hello World!')
 
 });
 
