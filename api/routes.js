@@ -7,7 +7,7 @@ const { apiCallPost, apiCallGet, apiCallDelete } = require("./helpers");
 
 router.get('/getListData', async (req, res) => {
 
-  console.log(req.body, "BODYYY")
+  console.log(req)
   // const parentId = process.env[req.body.myBody];
 
   // let response = await apiCallGet(``);
