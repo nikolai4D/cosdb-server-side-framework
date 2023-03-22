@@ -8,7 +8,7 @@ require("dotenv").config();
 router.post('/getListData', async (req, res) => {
 
   const type = req.body.body
-  const url = process.env[type];
+  const url = process.env;
 
   console.log(type, url)
 
