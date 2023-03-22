@@ -7,7 +7,7 @@ require("dotenv").config();
 
 router.post('/getListData', async (req, res) => {
 
-  const url =req.body.url
+  const url =req.body.body
 
   console.log(req.body)
 
