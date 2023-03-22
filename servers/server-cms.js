@@ -32,7 +32,7 @@ cms.use(
 );
 
 cms.use(
-  "/components",
+  "/data-mgmt",
   express.static(
     path.join(
       __dirname,

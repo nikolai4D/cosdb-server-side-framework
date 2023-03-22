@@ -5,7 +5,7 @@ async function apiCallPost(reqBody, url) {
     let response;
 
     try {
-        response = await axios.post(process.env.API_BASE_URL + url, reqBody, {
+        response = await axios.post(url, reqBody, {
             withCredentials: true,
             credientials: "include",
             headers: {
@@ -26,7 +26,7 @@ async function apiCallGet(url) {
     let response;
 
     try {
-        response = await axios.get(process.env.API_BASE_URL + url, {
+        response = await axios.get(url, {
             withCredentials: true,
             credientials: "include",
             headers: {
@@ -47,7 +47,7 @@ async function apiCallDelete(url) {
     let response;
 
     try {
-        response = await axios.delete(process.env.API_BASE_URL + url, {
+        response = await axios.delete(url, {
             withCredentials: true,
             headers: {
                 apikey: process.env.API_KEY,
@@ -68,7 +68,7 @@ async function apiCallPut(reqBody, url) {
     let response;
 
     try {
-        response = await axios.put(process.env.API_BASE_URL + url, reqBody, {
+        response = await axios.put(url, reqBody, {
             withCredentials: true,
             headers: {
                 apikey: process.env.API_KEY,
