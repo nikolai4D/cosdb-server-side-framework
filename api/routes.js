@@ -10,6 +10,8 @@ router.post('/getListData', async (req, res) => {
   const type = req.body.body
   const url = process.env[type];
 
+  console.log(type, url)
+
   let response = await apiCallGet(url);
 
   if ((await response.status) !== 200) {
