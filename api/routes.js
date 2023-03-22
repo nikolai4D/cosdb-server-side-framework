@@ -6,9 +6,9 @@ const { apiCallPost, apiCallGet, apiCallDelete } = require("./helpers");
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 
-router.get('/getListData', async (req, res) => {
+router.post('/getListData', async (req, res) => {
 
-  // console.log(req)
+  console.log(req)
   // const parentId = process.env[req.body.myBody];
 
   // let response = await apiCallGet(``);
