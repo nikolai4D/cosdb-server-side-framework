@@ -7,8 +7,9 @@ require("dotenv").config();
 
 router.post('/getListData', async (req, res) => {
 
-  const type = req.body.body.toUpperCase()
-  const url = process.env[type]
+  const url =req.body.url
+
+  console.log(req.body)
 
   let response = await apiCallGet(url);
 
