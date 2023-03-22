@@ -8,7 +8,7 @@ router.use(bodyParser.json());
 
 router.post('/getListData', async (req, res) => {
 
-  console.log(req)
+  // console.log(req)
   // const parentId = process.env[req.body.myBody];
 
   // let response = await apiCallGet(``);
