@@ -2,7 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 async function writeFilesPerKey(data) {
-  const baseDir = path.join(__dirname, "/../../../");
+  const baseDir = path.join(__dirname, "/../../../../");
 
   for (const key of Object.keys(data)) {
     console.log("key", key);
