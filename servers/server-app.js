@@ -36,7 +36,7 @@ app.get("/auth/:viewPath", async (req, res) => {
       res.send({ viewPath });
     } else {
       console.log(viewPath + " not found");
-      res.send({ viewPath: "" }); // path = "" to redirect to start page
+      res.send({ viewPath: "notfound" }); // path = "" to redirect to start page
     }
   } catch (error) {
     console.error("An error occurred while reading the file:", error);
