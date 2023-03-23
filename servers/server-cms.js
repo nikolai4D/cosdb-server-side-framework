@@ -50,7 +50,7 @@ cms.get("/getuuid", async (req, res) => {
 cms.get("/read", (req, res) => {
   try {
     const data = fs.readFileSync(
-      path.join(__dirname, "/../../../model.json"),
+      path.join(__dirname, "/../../../model/model.json"),
       "utf-8"
     );
     res.json(JSON.parse(data));
@@ -64,7 +64,7 @@ cms.put("/update", async (req, res) => {
   try {
     const data = req.body;
     await fs.promises.writeFile(
-      path.join(__dirname, "/../../../model.json"),
+      path.join(__dirname, "/../../../model/model.json"),
       JSON.stringify(data, null, 4)
     );
 
