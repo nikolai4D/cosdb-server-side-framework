@@ -29,7 +29,8 @@ app.get("/auth/:viewPath", async (req, res) => {
         "utf-8"
       )
     );
-    if (await views.find((view) => view.value === viewPath)) {
+    const view = views.find((view) => view.value === viewPath);
+    if (view) {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
       res.send(viewPath);
     } else {
