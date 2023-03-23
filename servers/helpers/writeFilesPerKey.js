@@ -5,6 +5,7 @@ async function writeFilesPerKey(data) {
   const baseDir = path.join(__dirname, "/../../../");
 
   for (const key of Object.keys(data)) {
+    console.log("key", key);
     const fileName = `model_${key}.json`;
     const filePath = path.join(baseDir, fileName);
 
