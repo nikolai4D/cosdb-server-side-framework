@@ -32,10 +32,10 @@ app.get("/auth/:viewPath", async (req, res) => {
     const view = views.find((view) => view.value === viewPath);
     if (view) {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
-      res.send(viewPath);
+      res.send({ viewPath });
     } else {
       console.log(viewPath + " not found");
-      res.send(""); // path = "" to redirect to start page
+      res.send({ viewPath: "" }); // path = "" to redirect to start page
     }
   } catch (error) {
     console.error("An error occurred while reading the file:", error);
