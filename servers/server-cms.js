@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
-const writeFilesPerKey = require("./helpers/writeFilesPerKey.mjs");
+const writeFilesPerKey = require("./helpers/writeFilesPerKey.js");
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
