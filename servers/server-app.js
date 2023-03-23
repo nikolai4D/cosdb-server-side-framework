@@ -20,6 +20,25 @@ app.use(
   )
 );
 
+app.get("/auth/:path", async (req, res) => {
+  const { path } = req.params;
+  try {
+    const views = fs.readFileSync(
+      path.join(__dirname, `/../../../model/model_views.json`),
+      "utf-8"
+    );
+    if (await views.some((view) => view.value === path)) {
+      console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
+      res.send(path);
+    } else {
+      res.send(""); // path = "" to redirect to start page
+    }
+  } catch (error) {
+    console.error("An error occurred while reading the file:", error);
+    res.sendStatus(500);
+  }
+});
+
 app.get("/read/:key", (req, res) => {
   const { key } = req.params;
   fs.readFile(
