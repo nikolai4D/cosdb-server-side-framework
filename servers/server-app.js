@@ -20,16 +20,16 @@ app.use(
   )
 );
 
-app.get("/auth/:view", (req, res) => {
-  const { view } = req.params;
+app.get("/auth/:viewPath", (req, res) => {
+  const { viewPath } = req.params;
   try {
     const views = fs.readFileSync(
       path.join(__dirname, `/../../../model/model_views.json`),
       "utf-8"
     );
-    if (views.some((v) => v.value === view)) {
+    if (views.some((view) => view.value === viewPath)) {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
-      res.send(view);
+      res.send(viewPath);
     } else {
       res.send(""); // path = "" to redirect to start page
     }
