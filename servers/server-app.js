@@ -27,7 +27,7 @@ app.get("/auth/:viewPath", (req, res) => {
       path.join(__dirname, `/../../../model/model_views.json`),
       "utf-8"
     );
-    if (views.some((view) => view.value === viewPath)) {
+    if (views.find((view) => view.value === viewPath)) {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
       res.send(viewPath);
     } else {
