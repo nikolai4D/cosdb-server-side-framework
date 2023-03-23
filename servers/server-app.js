@@ -34,6 +34,7 @@ app.get("/auth/:viewPath", async (req, res) => {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
       res.send(viewPath);
     } else {
+      console.log(viewPath + " not found");
       res.send(""); // path = "" to redirect to start page
     }
   } catch (error) {
