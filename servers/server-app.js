@@ -21,7 +21,6 @@ app.use(
 );
 
 app.get("/auth/:viewPath", async (req, res) => {
-  console.log("req.params", req.params);
   const { viewPath } = req.params;
   try {
     const views = JSON.parse(
@@ -38,6 +37,27 @@ app.get("/auth/:viewPath", async (req, res) => {
       const view404 = views.find((view) => view.value === "404");
       console.log(viewPath + " not found");
       res.send({ value: view404.value, id: view404.id }); // path = "" to redirect to 404 page
+    }
+  } catch (error) {
+    console.error("An error occurred while reading the file:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.get("/read/:key/:parentId", async (req, res) => {
+  const { key, parentId } = req.params;
+  try {
+    const datas = JSON.parse(
+      fs.readFileSync(
+        path.join(__dirname, `/../../../model/model_${key}.json`),
+        "utf-8"
+      )
+    );
+    const data = datas.find((d) => d.parentId === parentId);
+    if (data) {
+      res.send(data);
+    } else {
+      res.sendStatus(404);
     }
   } catch (error) {
     console.error("An error occurred while reading the file:", error);
