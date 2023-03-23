@@ -20,14 +20,14 @@ app.use(
   )
 );
 
-app.get("/auth/:viewPath", (req, res) => {
+app.get("/auth/:viewPath", async (req, res) => {
   const { viewPath } = req.params;
   try {
     const views = fs.readFileSync(
       path.join(__dirname, `/../../../model/model_views.json`),
       "utf-8"
     );
-    if (views.find((view) => view.value === viewPath)) {
+    if (await views.find((view) => view.value === viewPath)) {
       console.log("protected :" + view.protected); // AUTH FOR PROTECTED ROUTES WILL BE IMPLEMENTED HERE
       res.send(viewPath);
     } else {
