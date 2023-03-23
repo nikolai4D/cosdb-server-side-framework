@@ -21,6 +21,7 @@ app.use(
 );
 
 app.get("/auth/:viewPath", async (req, res) => {
+  console.log("req.params", req.params);
   const { viewPath } = req.params;
   try {
     const views = JSON.parse(
