@@ -53,8 +53,8 @@ app.get("/read/:key/:parentId", async (req, res) => {
         "utf-8"
       )
     );
-    const data = datas.find((d) => d.parentId === parentId);
-    if (data) {
+    const data = datas.filter((d) => d.parentId === parentId);
+    if (data.length > 0) {
       res.send(data);
     } else {
       res.sendStatus(404);
