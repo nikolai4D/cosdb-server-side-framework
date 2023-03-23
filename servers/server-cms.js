@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
+const writeFilesPerKey = require("./helpers/writeFilesPerKey.mjs");
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -66,6 +67,9 @@ cms.put("/update", async (req, res) => {
       path.join(__dirname, "/../../../model.json"),
       JSON.stringify(data, null, 4)
     );
+
+    await writeFilesPerKey(data);
+
     res.send({ data, message: "The file has been successfully updated." });
   } catch (error) {
     console.error(error);
