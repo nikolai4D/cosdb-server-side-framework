@@ -10,7 +10,7 @@ async function readModelFromParentId(key, parentId) {
     )
   );
   console.log("model", model);
-  const comp = model.filter((c) => c.parentId === parentId);
+  const comp = model.filter((c) => c.id === parentId);
   console.log("comp", comp);
   return comp;
 }
