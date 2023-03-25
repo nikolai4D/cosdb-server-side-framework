@@ -4,6 +4,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const app = express();
+const getModelForComp = require("./helpers/getModelForComp.js");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -54,6 +55,21 @@ app.get("/read/:key/:parentId", async (req, res) => {
       )
     );
     const data = datas.filter((d) => d.parentId === parentId);
+    if (data.length > 0) {
+      res.send(data);
+    } else {
+      res.sendStatus(404);
+    }
+  } catch (error) {
+    console.error("An error occurred while reading the file:", error);
+    res.sendStatus(500);
+  }
+});
+
+app.get("/read/comp/:parentId", async (req, res) => {
+  const { parentId } = req.params;
+  try {
+    const data = await getModelForComp(parentId);
     if (data.length > 0) {
       res.send(data);
     } else {
