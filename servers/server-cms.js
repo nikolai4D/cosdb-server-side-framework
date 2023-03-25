@@ -42,7 +42,7 @@ cms.use(
 );
 
 cms.use(
-  "/app-boilerplate",
+  "/",
   express.static(
     path.join(
       __dirname,
