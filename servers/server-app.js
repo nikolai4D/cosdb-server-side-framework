@@ -45,16 +45,10 @@ app.get("/auth/:viewPath", async (req, res) => {
   }
 });
 
-app.get("/read/:key/:parentId", async (req, res) => {
-  const { key, parentId } = req.params;
+app.get("/readComponent/:parentId", async (req, res) => {
+  const { parentId } = req.params;
   try {
-    const datas = JSON.parse(
-      fs.readFileSync(
-        path.join(__dirname, `/../../../model/model_${key}.json`),
-        "utf-8"
-      )
-    );
-    const data = datas.filter((d) => d.parentId === parentId);
+    const data = await getModelForComp(parentId);
     if (data.length > 0) {
       res.send(data);
     } else {
@@ -66,10 +60,16 @@ app.get("/read/:key/:parentId", async (req, res) => {
   }
 });
 
-app.get("/read/comp/:parentId", async (req, res) => {
-  const { parentId } = req.params;
+app.get("/read/:key/:parentId", async (req, res) => {
+  const { key, parentId } = req.params;
   try {
-    const data = await getModelForComp(parentId);
+    const datas = JSON.parse(
+      fs.readFileSync(
+        path.join(__dirname, `/../../../model/model_${key}.json`),
+        "utf-8"
+      )
+    );
+    const data = datas.filter((d) => d.parentId === parentId);
     if (data.length > 0) {
       res.send(data);
     } else {
