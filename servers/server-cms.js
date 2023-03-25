@@ -41,6 +41,17 @@ cms.use(
   )
 );
 
+cms.use(
+  "/app-boilerplate",
+  express.static(
+    path.join(
+      __dirname,
+      "/../../../node_modules/cosdb-client-framework/app-boilerplate"
+    )
+  )
+);
+
+
 cms.get("/getuuid", async (req, res) => {
   const newUuid = JSON.stringify(uuidv4());
   res.send(newUuid);
