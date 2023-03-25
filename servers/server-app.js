@@ -45,20 +45,20 @@ app.get("/auth/:viewPath", async (req, res) => {
   }
 });
 
-app.get("/readComponent/:parentId", async (req, res) => {
-  const { parentId } = req.params;
-  try {
-    const data = await getModelForComp(parentId);
-    if (data.length > 0) {
-      res.send(data);
-    } else {
-      res.sendStatus(404);
-    }
-  } catch (error) {
-    console.error("An error occurred while reading the file:", error);
-    res.sendStatus(500);
-  }
-});
+// app.get("/readComponent/:parentId", async (req, res) => {
+//   const { parentId } = req.params;
+//   try {
+//     const data = await getModelForComp(parentId);
+//     if (data.length > 0) {
+//       res.send(data);
+//     } else {
+//       res.sendStatus(404);
+//     }
+//   } catch (error) {
+//     console.error("An error occurred while reading the file:", error);
+//     res.sendStatus(500);
+//   }
+// });
 
 app.get("/read/:key/:parentId", async (req, res) => {
   const { key, parentId } = req.params;
