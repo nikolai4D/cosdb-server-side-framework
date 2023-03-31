@@ -14,7 +14,7 @@ app.use(cookieParser());
 app.use(
   "/node_modules/bootstrap-icons/font",
   express.static(
-    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/node_modules/bootstap-icons/font"),
+    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/node_modules/bootstrap-icons/font"),
     {
       setHeaders: function(res, path, stat) {
         res.set('Content-Type', 'text/css');
