@@ -11,6 +11,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
+app.use(
+  "/node_modules",
+  express.static(
+    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/node_modules")
+  )
+);
 
 app.use(
   "/",
@@ -34,12 +40,6 @@ app.get("/read", (req, res) => {
   );
 });
 
-app.use(
-  "/node_modules",
-  express.static(
-    path.join(__dirname, "/../../../node_modules/cosdb-client-framework/node_modules")
-  )
-);
 
 
 app.use(
