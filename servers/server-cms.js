@@ -8,6 +8,16 @@ cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
 
 cms.use(
+  "/",
+  express.static(
+    path.join(
+      __dirname,
+      "/../../../node_modules/cosdb-client-framework/app-boilerplate"
+    )
+  )
+);
+
+cms.use(
   "/cms",
   express.static(
     path.join(__dirname, "/../../../node_modules/cosdb-client-framework/cms")
@@ -41,15 +51,7 @@ cms.use(
   )
 );
 
-cms.use(
-  "/",
-  express.static(
-    path.join(
-      __dirname,
-      "/../../../node_modules/cosdb-client-framework/app-boilerplate"
-    )
-  )
-);
+
 
 
 cms.get("/getuuid", async (req, res) => {
