@@ -26,7 +26,11 @@ router.get("/:key/:parentId", async (req, res) => {
 
   const url = process.env.API_URL + key + "?parentId=" + parentId;
 
+  console.log("url: ", url);
+
   let response = await apiCallGet(url);
+
+  console.log(response);
 
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
