@@ -3,6 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const cms = express();
 const { v4: uuidv4 } = require("uuid");
+const writeFilesPerKey = require("./helpers/writeFilesPerKey.js");
 
 cms.use(express.json());
 cms.use(express.urlencoded({ extended: true }));
@@ -62,7 +63,7 @@ cms.get("/getuuid", async (req, res) => {
 cms.get("/read", (req, res) => {
   try {
     const data = fs.readFileSync(
-      path.join(__dirname, "/../../../model.json"),
+      path.join(__dirname, "/../../../model/model.json"),
       "utf-8"
     );
     res.json(JSON.parse(data));
@@ -76,9 +77,12 @@ cms.put("/update", async (req, res) => {
   try {
     const data = req.body;
     await fs.promises.writeFile(
-      path.join(__dirname, "/../../../model.json"),
+      path.join(__dirname, "/../../../model/model.json"),
       JSON.stringify(data, null, 4)
     );
+
+    await writeFilesPerKey(data);
+
     res.send({ data, message: "The file has been successfully updated." });
   } catch (error) {
     console.error(error);
