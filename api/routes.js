@@ -19,6 +19,7 @@ router.post("/getListData", async (req, res) => {
 
 router.get("/:key/:parentId", async (req, res) => {
   const { key, parentId } = req.params;
+  console.log("key: ", key, "parentId: ", parentId);
   if (key !== "type" || key !== "instance" || key !== "object") {
     return res.status(400).json({ error: "Invalid key" });
   }
