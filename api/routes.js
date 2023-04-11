@@ -39,4 +39,16 @@ router.get("/:key/:parentId", async (req, res) => {
   }
 });
 
+router.post("/relatedNodes", async (req, res) => {
+  const url = process.env.API_URL + "typeData/getRelatedNodes";
+
+  let response = await apiCallPost(req.body, url);
+
+  if ((await response.status) !== 200) {
+    return res.status(response.status).json(response.data);
+  } else {
+    return res.json(response.data);
+  }
+});
+
 module.exports = router;
