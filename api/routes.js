@@ -52,7 +52,7 @@ router.post("/relatedNodes", async (req, res) => {
   }
 });
 
-app.get("/auth/:viewPath", async (req, res) => {
+router.get("/auth/:viewPath", async (req, res) => {
   const { viewPath } = req.params;
   try {
     const views = JSON.parse(
@@ -76,7 +76,7 @@ app.get("/auth/:viewPath", async (req, res) => {
   }
 });
 
-app.get("/read/:key/:parentId", async (req, res) => {
+router.get("/read/:key/:parentId", async (req, res) => {
   const { key, parentId } = req.params;
   try {
     const datas = JSON.parse(
@@ -97,7 +97,7 @@ app.get("/read/:key/:parentId", async (req, res) => {
   }
 });
 
-app.get("/read/:key", (req, res) => {
+router.get("/read/:key", (req, res) => {
   const { key } = req.params;
   fs.readFile(
     path.join(__dirname, `/../../../model/model_${key}.json`),
@@ -113,7 +113,7 @@ app.get("/read/:key", (req, res) => {
   );
 });
 
-app.get("/read", (req, res) => {
+router.get("/read", (req, res) => {
   fs.readFile(
     path.join(__dirname, "/../../../model/model.json"),
     "utf-8",
