@@ -57,7 +57,7 @@ router.get("/auth/:viewPath", async (req, res) => {
   try {
     const views = JSON.parse(
       fs.readFileSync(
-        path.join(__dirname, `/../../../model/model_views.json`),
+        path.join(__dirname, `/../../../../model/model_views.json`),
         "utf-8"
       )
     );
@@ -81,7 +81,7 @@ router.get("/read/:key/:parentId", async (req, res) => {
   try {
     const datas = JSON.parse(
       fs.readFileSync(
-        path.join(__dirname, `/../../../model/model_${key}.json`),
+        path.join(__dirname, `/../../../../model/model_${key}.json`),
         "utf-8"
       )
     );
@@ -100,7 +100,7 @@ router.get("/read/:key/:parentId", async (req, res) => {
 router.get("/read/:key", (req, res) => {
   const { key } = req.params;
   fs.readFile(
-    path.join(__dirname, `/../../../model/model_${key}.json`),
+    path.join(__dirname, `/../../../../model/model_${key}.json`),
     "utf-8",
     (error, data) => {
       if (error) {
@@ -115,7 +115,7 @@ router.get("/read/:key", (req, res) => {
 
 router.get("/read", (req, res) => {
   fs.readFile(
-    path.join(__dirname, "/../../../model/model.json"),
+    path.join(__dirname, "/../../../../model/model.json"),
     "utf-8",
     (error, data) => {
       if (error) {
