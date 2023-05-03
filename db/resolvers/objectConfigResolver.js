@@ -1,4 +1,5 @@
 const ObjectConfig = require("../models/objectConfig.js");
+const DefinitionConfig = require("../models/definitionConfig.js");
 
 const objectConfigResolver = {
   Query: {
