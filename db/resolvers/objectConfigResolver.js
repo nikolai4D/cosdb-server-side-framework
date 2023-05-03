@@ -4,14 +4,11 @@ const DefinitionConfig = require("../models/definitionConfig.js");
 const objectConfigResolver = {
   Query: {
     objectConfigs: async (_, { parentUuid }) => {
-      const objectConfigs = await ObjectConfig.findAll({
-        include: parentUuid
-          ? {
-              model: DefinitionConfig,
-              where: { uuid: parentUuid },
-            }
-          : undefined,
-      });
+      const objectConfigs = await ObjectConfig.findAll(include: {
+        model: DefinitionConfig,
+        where: parentUuid ? { uuid: parentUuid } : undefined,
+        required: false,
+      },);
       return objectConfigs;
     },
     objectConfig: async (_, { uuid }) => {
