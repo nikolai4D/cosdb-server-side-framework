@@ -2,19 +2,25 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
 const DefinitionConfig = require("./DefinitionConfig.js");
 
-const ObjectConfig = sequelize.define("ObjectConfig", {
-  uuid: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    primaryKey: true,
+const ObjectConfig = sequelize.define(
+  "ObjectConfig",
+  {
+    uuid: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      primaryKey: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+    },
+    description: {
+      type: DataTypes.TEXT,
+    },
   },
-  title: {
-    type: DataTypes.STRING,
-  },
-  description: {
-    type: DataTypes.TEXT,
-  },
-});
+  {
+    tableName: "ObjectConfig",
+  }
+);
 
 ObjectConfig.belongsTo(DefinitionConfig, { foreignKey: "parent" });
 
