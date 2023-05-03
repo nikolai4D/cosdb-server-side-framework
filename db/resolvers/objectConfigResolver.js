@@ -2,8 +2,15 @@ const ObjectConfig = require("../models/objectConfig.js");
 
 const objectConfigResolver = {
   Query: {
-    objectConfigs: async () => {
-      const objectConfigs = await ObjectConfig.findAll();
+    objectConfigs: async (_, { parentUuid }) => {
+      const objectConfigs = await ObjectConfig.findAll({
+        include: parentUuid
+          ? {
+              model: DefinitionConfig,
+              where: { uuid: parentUuid },
+            }
+          : undefined,
+      });
       return objectConfigs;
     },
     objectConfig: async (_, { uuid }) => {
@@ -51,15 +58,6 @@ const objectConfigResolver = {
       }
 
       throw new Error("ObjectConfig not found");
-    },
-  },
-  ObjectConfig: {
-    parent: async (objectConfig, { parentUuid }) => {
-      const parent = await objectConfig.getDefinitionConfig();
-      if (parentUuid && parent.uuid !== parentUuid) {
-        return null;
-      }
-      return parent;
     },
   },
 };
