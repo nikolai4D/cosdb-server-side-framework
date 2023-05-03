@@ -65,7 +65,7 @@ modelFiles.forEach((file) => {
 
 // Load the GraphQL type definitions and resolvers
 const typesArray = loadFilesSync(
-  path.resolve(__dirname, "../db/schema/**/*.graphql")
+  path.resolve(__dirname, "../db/schemas/**/*.graphql")
 );
 
 typesArray.forEach((typeDef) => {
@@ -73,7 +73,7 @@ typesArray.forEach((typeDef) => {
 });
 
 const fs = require("fs");
-const schemaPath = path.resolve(__dirname, "../db/schema");
+const schemaPath = path.resolve(__dirname, "../db/schemas");
 
 fs.readdirSync(schemaPath).forEach((file) => {
   const filePath = path.join(schemaPath, file);
