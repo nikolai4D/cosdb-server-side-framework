@@ -1,0 +1,23 @@
+type DefinitionConfig {
+  uuid: ID!
+  title: String!
+  description: String!
+}
+
+type Query {
+  definitionConfigs: [DefinitionConfig!]!
+  definitionConfig(uuid: ID!): DefinitionConfig
+}
+
+type Mutation {
+  createDefinitionConfig(
+    title: String!
+    description: String!
+  ): DefinitionConfig!
+  updateDefinitionConfig(
+    uuid: ID!
+    title: String!
+    description: String!
+  ): DefinitionConfig!
+  deleteDefinitionConfig(uuid: ID!): Boolean!
+}
