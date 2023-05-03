@@ -57,13 +57,8 @@ app.use(
 app.use("/api", require("../api/routes.js"));
 
 // Import the models and register them with Sequelize
-// const models = {};
-// const modelFiles = loadFilesSync(path.join(__dirname, "../db/models/**/*.js"));
-// console.log("Model Files:", modelFiles);
-// modelFiles.forEach((file) => {
-//   const model = require(file).default;
-//   models[model.name] = model;
-// });
+
+console.log("Models:", { models });
 
 // Load the GraphQL type definitions and resolvers
 const typesArray = loadFilesSync(
