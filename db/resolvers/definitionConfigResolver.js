@@ -4,6 +4,7 @@ const definitionConfigResolver = {
   Query: {
     definitionConfigs: async () => {
       const definitionConfigs = await DefinitionConfig.findAll();
+      console.log("definitionConfigs:", definitionConfigs);
       return definitionConfigs;
     },
     definitionConfig: async (_, { uuid }) => {
