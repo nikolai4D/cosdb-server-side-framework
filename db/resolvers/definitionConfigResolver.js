@@ -1,14 +1,31 @@
 const DefinitionConfig = require("../models/definitionConfig.js");
+const DefinitionConfigExternalRel = require("../models/definitionConfigExternalRel.js");
+const DefinitionConfigInternalRel = require("../models/definitionConfigInternalRel.js");
 
 const definitionConfigResolver = {
   Query: {
     definitionConfigs: async () => {
-      const definitionConfigs = await DefinitionConfig.findAll();
-      console.log("definitionConfigs:", definitionConfigs);
+      const definitionConfigs = await DefinitionConfig.findAll({
+        include: [
+          { model: DefinitionConfigExternalRel, as: "externalRelsAsSource" },
+          { model: DefinitionConfigExternalRel, as: "externalRelsAsTarget" },
+          { model: DefinitionConfigInternalRel, as: "internalRelsAsSource" },
+          { model: DefinitionConfigInternalRel, as: "internalRelsAsTarget" },
+        ],
+      });
+
       return definitionConfigs;
     },
     definitionConfig: async (_, { uuid }) => {
-      const definitionConfig = await DefinitionConfig.findByPk(uuid);
+      const definitionConfig = await DefinitionConfig.findByPk(uuid, {
+        include: [
+          { model: DefinitionConfigExternalRel, as: "externalRelsAsSource" },
+          { model: DefinitionConfigExternalRel, as: "externalRelsAsTarget" },
+          { model: DefinitionConfigInternalRel, as: "internalRelsAsSource" },
+          { model: DefinitionConfigInternalRel, as: "internalRelsAsTarget" },
+        ],
+      });
+
       return definitionConfig;
     },
   },

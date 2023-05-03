@@ -80,6 +80,16 @@ const definitionConfigInternalRelResolver = {
       throw new Error("DefinitionConfigInternalRel not found");
     },
   },
+  DefinitionConfigInternalRel: {
+    source: async (definitionConfigInternalRel) => {
+      const source = await definitionConfigInternalRel.getDefinitionConfig();
+      return source;
+    },
+    target: async (definitionConfigInternalRel) => {
+      const target = await definitionConfigInternalRel.getDefinitionConfig();
+      return target;
+    },
+  },
 };
 
 module.exports = definitionConfigInternalRelResolver;

@@ -1,6 +1,5 @@
 const DefinitionConfigExternalRel = require("../models/definitionConfigExternalRel.js");
 const DefinitionConfig = require("../models/definitionConfig.js");
-const { where } = require("sequelize");
 
 const definitionConfigExternalRelResolver = {
   Query: {
@@ -78,6 +77,16 @@ const definitionConfigExternalRelResolver = {
       }
 
       throw new Error("DefinitionConfigExternalRel not found");
+    },
+  },
+  DefinitionConfigExternalRel: {
+    source: async (definitionConfigExternalRel) => {
+      const source = await definitionConfigExternalRel.getDefinitionConfig();
+      return source;
+    },
+    target: async (definitionConfigExternalRel) => {
+      const target = await definitionConfigExternalRel.getDefinitionConfig();
+      return target;
     },
   },
 };
