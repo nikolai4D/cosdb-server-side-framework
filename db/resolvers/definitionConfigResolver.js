@@ -1,9 +1,10 @@
 const definitionConfigResolver = {
   Query: {
     definitionConfigs: async (_, __, context) => {
-      const definitionConfigs = await context.models.DefinitionConfig.findAll();
       console.log("Context models:", context.models);
       console.log("DefinitionConfig model:", context.models.DefinitionConfig);
+      const definitionConfigs = await context.models.DefinitionConfig.findAll();
+
       return definitionConfigs;
     },
     definitionConfig: async (_, { uuid }, context) => {
