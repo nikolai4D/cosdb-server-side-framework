@@ -84,7 +84,7 @@ const schema = makeExecutableSchema({ typeDefs, resolvers });
 app.use(
   "/graphql",
   graphqlHTTP(async (req, res) => {
-    const context = { models, sequelize };
+    const context = { models: sequelize.models };
     return {
       schema,
       context,
