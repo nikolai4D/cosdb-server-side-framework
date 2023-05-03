@@ -64,9 +64,11 @@ modelFiles.forEach((file) => {
 });
 
 // Load the GraphQL type definitions and resolvers
-const typesArray = loadFilesSync(path.join(__dirname, "./schema/**/*.graphql"));
+const typesArray = loadFilesSync(
+  path.resolve(__dirname, "../db/schema/*.graphql")
+);
 const resolversArray = loadFilesSync(
-  path.join(__dirname, "./resolvers/**/*.js")
+  path.resolve(__dirname, "../db/resolvers/*.js")
 );
 
 // Merge the type definitions and resolvers into a single executable schema
