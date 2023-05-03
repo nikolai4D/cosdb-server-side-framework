@@ -2,8 +2,8 @@ type DefinitionConfigInternalRel {
   uuid: ID
   title: String
   description: String
-  source: ID
-  target: ID
+  source: DefinitionConfig
+  target: DefinitionConfig
 }
 
 type Query {

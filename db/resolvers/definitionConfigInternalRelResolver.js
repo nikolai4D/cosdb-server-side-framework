@@ -84,13 +84,13 @@ const definitionConfigInternalRelResolver = {
       const source = await DefinitionConfig.findByPk(
         definitionConfigInternalRel.source
       );
-      return source.uuid;
+      return source;
     },
     target: async (definitionConfigInternalRel) => {
       const target = await DefinitionConfig.findByPk(
         definitionConfigInternalRel.target
       );
-      return target.uuid;
+      return target;
     },
   },
 };

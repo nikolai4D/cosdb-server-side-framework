@@ -2,8 +2,8 @@ type DefinitionConfigExternalRel {
   uuid: ID
   title: String
   description: String
-  source: ID
-  target: ID
+  source: DefinitionConfig
+  target: DefinitionConfig
 }
 
 type Query {
@@ -15,8 +15,8 @@ type Mutation {
   createDefinitionConfigExternalRel(
     title: String
     description: String
-    source: ID
-    target: ID
+    sourceUuid: ID
+    targetUuid: ID
   ): DefinitionConfigExternalRel
   updateDefinitionConfigExternalRel(
     uuid: ID
