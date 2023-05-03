@@ -1,8 +1,8 @@
 type ObjectConfig {
   uuid: ID!
-  title: String!
-  description: String!
-  parent: DefinitionConfig!
+  title: String
+  description: String
+  parent: DefinitionConfig
 }
 
 type Query {
