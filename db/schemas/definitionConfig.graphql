@@ -2,6 +2,10 @@ type DefinitionConfig {
   uuid: ID
   title: String
   description: String
+  externalRelsAsSource: DefinitionConfigExternalRel
+  externalRelsAsTarget: DefinitionConfigExternalRel
+  internalRelsAsSource: DefinitionConfigInternalRel
+  internalRelsAsTarget: DefinitionConfigInternalRel
 }
 
 type Query {
