@@ -23,3 +23,23 @@ const DefinitionConfig = sequelize.define(
 );
 
 module.exports = DefinitionConfig;
+
+const DefinitionConfigExternalRel = require("./definitionConfigExternalRel.js");
+const DefinitionConfigInternalRel = require("./definitionConfigInternalRel.js");
+
+DefinitionConfig.hasMany(DefinitionConfigExternalRel, {
+  foreignKey: "source",
+  as: "externalRelsAsSource",
+});
+DefinitionConfig.hasMany(DefinitionConfigExternalRel, {
+  foreignKey: "target",
+  as: "externalRelsAsTarget",
+});
+DefinitionConfig.hasMany(DefinitionConfigInternalRel, {
+  foreignKey: "source",
+  as: "internalRelsAsSource",
+});
+DefinitionConfig.hasMany(DefinitionConfigInternalRel, {
+  foreignKey: "target",
+  as: "internalRelsAsTarget",
+});
