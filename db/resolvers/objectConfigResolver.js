@@ -7,10 +7,7 @@ const objectConfigResolver = {
       const whereClause = parentUuid ? { parent: parentUuid } : {};
       const objectConfigs = await ObjectConfig.findAll({
         where: whereClause,
-        include: {
-          model: DefinitionConfig,
-          as: "parent",
-        },
+        include: DefinitionConfig,
       });
       return objectConfigs;
     },
@@ -59,6 +56,12 @@ const objectConfigResolver = {
       }
 
       throw new Error("ObjectConfig not found");
+    },
+  },
+  ObjectConfig: {
+    parent: async (objectConfig) => {
+      const parent = await objectConfig.getParent();
+      return parent;
     },
   },
 };
