@@ -60,7 +60,7 @@ const objectConfigResolver = {
   },
   ObjectConfig: {
     parent: async (objectConfig) => {
-      const parent = await objectConfig.getParent();
+      const parent = await objectConfig.getDefinitionConfig();
       return parent;
     },
   },
