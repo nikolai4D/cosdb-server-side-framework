@@ -57,7 +57,7 @@ app.use("/api", require("../api/routes.js"));
 
 // Import the models and register them with Sequelize
 const models = {};
-const modelFiles = loadFilesSync(path.join(__dirname, "./models/*.js"));
+const modelFiles = loadFilesSync(path.join(__dirname, "./models/**/*.js"));
 modelFiles.forEach((file) => {
   const model = require(file)(sequelize, Sequelize.DataTypes);
   models[model.name] = model;
