@@ -17,10 +17,11 @@ const objectConfigResolver = {
     },
   },
   Mutation: {
-    createObjectConfig: async (_, { title, description }) => {
+    createObjectConfig: async (_, { title, description, parentUuid }) => {
       const objectConfig = await ObjectConfig.create({
         title,
         description,
+        parent: parentUuid,
       });
       return objectConfig;
     },
