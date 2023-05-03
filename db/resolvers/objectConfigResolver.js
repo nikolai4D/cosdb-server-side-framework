@@ -54,9 +54,9 @@ const objectConfigResolver = {
     },
   },
   ObjectConfig: {
-    parent: async (objectConfig, { uuid }) => {
+    parent: async (objectConfig, { parentUuid }) => {
       const parent = await objectConfig.getDefinitionConfig();
-      if (uuid && parent.uuid !== uuid) {
+      if (parentUuid && parent.uuid !== parentUuid) {
         return null;
       }
       return parent;

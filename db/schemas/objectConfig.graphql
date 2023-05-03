@@ -2,7 +2,7 @@ type ObjectConfig {
   uuid: ID!
   title: String!
   description: String!
-  parent(uuid: ID): DefinitionConfig
+  parent(parentUuid: ID): DefinitionConfig
 }
 
 type Query {
