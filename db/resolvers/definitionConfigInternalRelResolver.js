@@ -1,6 +1,5 @@
 const DefinitionConfigInternalRel = require("../models/definitionConfigInternalRel.js");
 const DefinitionConfig = require("../models/definitionConfig.js");
-const { where } = require("sequelize");
 
 const definitionConfigInternalRelResolver = {
   Query: {
@@ -82,11 +81,13 @@ const definitionConfigInternalRelResolver = {
   },
   DefinitionConfigInternalRel: {
     source: async (definitionConfigInternalRel) => {
-      const source = await definitionConfigInternalRel.getDefinitionConfig();
+      const source =
+        await definitionConfigInternalRel.getInternalRelsAsSource();
       return source;
     },
     target: async (definitionConfigInternalRel) => {
-      const target = await definitionConfigInternalRel.getDefinitionConfig();
+      const target =
+        await definitionConfigInternalRel.getInternalRelsAsTarget();
       return target;
     },
   },

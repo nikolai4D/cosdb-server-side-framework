@@ -81,11 +81,13 @@ const definitionConfigExternalRelResolver = {
   },
   DefinitionConfigExternalRel: {
     source: async (definitionConfigExternalRel) => {
-      const source = await definitionConfigExternalRel.getDefinitionConfig();
+      const source =
+        await definitionConfigExternalRel.getExternalRelsAsSource();
       return source;
     },
     target: async (definitionConfigExternalRel) => {
-      const target = await definitionConfigExternalRel.getDefinitionConfig();
+      const target =
+        await definitionConfigExternalRel.getExternalRelsAsTarget();
       return target;
     },
   },
