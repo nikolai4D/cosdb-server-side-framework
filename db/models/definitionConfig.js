@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
+const DefinitionConfigExternalRel = require("./definitionConfigExternalRel.js");
+const DefinitionConfigInternalRel = require("./definitionConfigInternalRel.js");
 
 const DefinitionConfig = sequelize.define(
   "DefinitionConfig",
@@ -22,11 +24,6 @@ const DefinitionConfig = sequelize.define(
   }
 );
 
-module.exports = DefinitionConfig;
-
-const DefinitionConfigExternalRel = require("./definitionConfigExternalRel.js");
-const DefinitionConfigInternalRel = require("./definitionConfigInternalRel.js");
-
 DefinitionConfig.hasMany(DefinitionConfigExternalRel, {
   foreignKey: "source",
   as: "externalRelsAsSource",
@@ -43,3 +40,5 @@ DefinitionConfig.hasMany(DefinitionConfigInternalRel, {
   foreignKey: "target",
   as: "internalRelsAsTarget",
 });
+
+module.exports = DefinitionConfig;

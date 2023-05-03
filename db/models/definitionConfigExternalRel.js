@@ -25,9 +25,11 @@ const DefinitionConfigExternalRel = sequelize.define(
 
 DefinitionConfigExternalRel.belongsTo(DefinitionConfig, {
   foreignKey: "source",
+  as: "sourceDefinitionConfig",
 });
 DefinitionConfigExternalRel.belongsTo(DefinitionConfig, {
   foreignKey: "target",
+  as: "targetDefinitionConfig",
 });
 
 module.exports = DefinitionConfigExternalRel;
