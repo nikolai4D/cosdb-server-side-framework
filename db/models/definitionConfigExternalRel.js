@@ -1,5 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
+const DefinitionConfig = require("./definitionConfig.js");
 
 const DefinitionConfigExternalRel = sequelize.define(
   "DefinitionConfigExternalRel",
