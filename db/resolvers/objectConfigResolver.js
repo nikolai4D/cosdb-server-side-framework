@@ -1,27 +1,26 @@
+const ObjectConfig = require("../models/objectConfig.js");
+
 const objectConfigResolver = {
   Query: {
-    objectConfigs: async (_, __, context) => {
-      console.log("Context models:", context.models);
-      console.log("objectConfig model:", context.models.objectConfig);
-      const objectConfigs = await context.models.objectConfig.findAll();
-
+    objectConfigs: async () => {
+      const objectConfigs = await ObjectConfig.findAll();
       return objectConfigs;
     },
-    objectConfig: async (_, { uuid }, context) => {
-      const objectConfig = await context.models.objectConfig.findByPk(uuid);
+    objectConfig: async (_, { uuid }) => {
+      const objectConfig = await ObjectConfig.findByPk(uuid);
       return objectConfig;
     },
   },
   Mutation: {
-    createobjectConfig: async (_, { title, description }, context) => {
-      const objectConfig = await context.models.objectConfig.create({
+    createObjectConfig: async (_, { title, description }) => {
+      const objectConfig = await ObjectConfig.create({
         title,
         description,
       });
       return objectConfig;
     },
-    updateobjectConfig: async (_, { uuid, title, description }, context) => {
-      const [updated] = await context.models.objectConfig.update(
+    updateObjectConfig: async (_, { uuid, title, description }) => {
+      const [updated] = await ObjectConfig.update(
         {
           title,
           description,
@@ -34,16 +33,14 @@ const objectConfigResolver = {
       );
 
       if (updated) {
-        const updatedobjectConfig = await context.models.objectConfig.findByPk(
-          uuid
-        );
-        return updatedobjectConfig;
+        const updatedObjectConfig = await ObjectConfig.findByPk(uuid);
+        return updatedObjectConfig;
       }
 
-      throw new Error("objectConfig not found");
+      throw new Error("ObjectConfig not found");
     },
-    deleteobjectConfig: async (_, { uuid }, context) => {
-      const deleted = await context.models.objectConfig.destroy({
+    deleteObjectConfig: async (_, { uuid }) => {
+      const deleted = await ObjectConfig.destroy({
         where: {
           uuid,
         },
@@ -53,7 +50,7 @@ const objectConfigResolver = {
         return true;
       }
 
-      throw new Error("objectConfig not found");
+      throw new Error("ObjectConfig not found");
     },
   },
 };

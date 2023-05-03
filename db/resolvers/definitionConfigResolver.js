@@ -1,33 +1,26 @@
+const DefinitionConfig = require("../models/definitionConfig.js");
+
 const definitionConfigResolver = {
   Query: {
-    definitionConfigs: async (_, __, context) => {
-      console.log("Context models:", context.models);
-      console.log("DefinitionConfig model:", context.models.DefinitionConfig);
-      const definitionConfigs = await context.models.DefinitionConfig.findAll();
-
+    definitionConfigs: async () => {
+      const definitionConfigs = await DefinitionConfig.findAll();
       return definitionConfigs;
     },
-    definitionConfig: async (_, { uuid }, context) => {
-      const definitionConfig = await context.models.DefinitionConfig.findByPk(
-        uuid
-      );
+    definitionConfig: async (_, { uuid }) => {
+      const definitionConfig = await DefinitionConfig.findByPk(uuid);
       return definitionConfig;
     },
   },
   Mutation: {
-    createDefinitionConfig: async (_, { title, description }, context) => {
-      const definitionConfig = await context.models.DefinitionConfig.create({
+    createDefinitionConfig: async (_, { title, description }) => {
+      const definitionConfig = await DefinitionConfig.create({
         title,
         description,
       });
       return definitionConfig;
     },
-    updateDefinitionConfig: async (
-      _,
-      { uuid, title, description },
-      context
-    ) => {
-      const [updated] = await context.models.DefinitionConfig.update(
+    updateDefinitionConfig: async (_, { uuid, title, description }) => {
+      const [updated] = await DefinitionConfig.update(
         {
           title,
           description,
@@ -40,15 +33,14 @@ const definitionConfigResolver = {
       );
 
       if (updated) {
-        const updatedDefinitionConfig =
-          await context.models.DefinitionConfig.findByPk(uuid);
+        const updatedDefinitionConfig = await DefinitionConfig.findByPk(uuid);
         return updatedDefinitionConfig;
       }
 
       throw new Error("DefinitionConfig not found");
     },
-    deleteDefinitionConfig: async (_, { uuid }, context) => {
-      const deleted = await context.models.DefinitionConfig.destroy({
+    deleteDefinitionConfig: async (_, { uuid }) => {
+      const deleted = await DefinitionConfig.destroy({
         where: {
           uuid,
         },

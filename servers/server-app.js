@@ -60,7 +60,7 @@ const models = {};
 const modelFiles = loadFilesSync(path.join(__dirname, "../db/models/**/*.js"));
 console.log("Model Files:", modelFiles);
 modelFiles.forEach((file) => {
-  const model = require(file)(sequelize, Sequelize.DataTypes);
+  const model = require(file);
   models[model.name] = model;
 });
 
