@@ -19,6 +19,7 @@ const ObjectConfig = sequelize.define(
   },
   {
     tableName: "ObjectConfig",
+    timestamps: false,
   }
 );
 

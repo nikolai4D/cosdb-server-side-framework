@@ -17,7 +17,8 @@ const DefinitionConfig = sequelize.define(
     },
   },
   {
-    tableName: "DefinitionConfig", // Add this line to explicitly specify the table name
+    tableName: "DefinitionConfig",
+    timestamps: false,
   }
 );
 
