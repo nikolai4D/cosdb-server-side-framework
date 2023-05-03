@@ -1,19 +1,17 @@
 const definitionConfigResolver = {
   Query: {
-    definitionConfigs: async (_, __, context) => {
-      const definitionConfigs = await context.models.DefinitionConfig.findAll();
+    definitionConfigs: async (_, __, { models }) => {
+      const definitionConfigs = await models.DefinitionConfig.findAll();
       return definitionConfigs;
     },
-    definitionConfig: async (_, { uuid }, context) => {
-      const definitionConfig = await context.models.DefinitionConfig.findByPk(
-        uuid
-      );
+    definitionConfig: async (_, { uuid }, { models }) => {
+      const definitionConfig = await models.DefinitionConfig.findByPk(uuid);
       return definitionConfig;
     },
   },
   Mutation: {
-    createDefinitionConfig: async (_, { title, description }, context) => {
-      const definitionConfig = await context.models.DefinitionConfig.create({
+    createDefinitionConfig: async (_, { title, description }, { models }) => {
+      const definitionConfig = await models.DefinitionConfig.create({
         title,
         description,
       });
@@ -22,9 +20,9 @@ const definitionConfigResolver = {
     updateDefinitionConfig: async (
       _,
       { uuid, title, description },
-      context
+      { models }
     ) => {
-      const [updated] = await context.models.DefinitionConfig.update(
+      const [updated] = await models.DefinitionConfig.update(
         {
           title,
           description,
@@ -37,15 +35,16 @@ const definitionConfigResolver = {
       );
 
       if (updated) {
-        const updatedDefinitionConfig =
-          await context.models.DefinitionConfig.findByPk(uuid);
+        const updatedDefinitionConfig = await models.DefinitionConfig.findByPk(
+          uuid
+        );
         return updatedDefinitionConfig;
       }
 
       throw new Error("DefinitionConfig not found");
     },
-    deleteDefinitionConfig: async (_, { uuid }, context) => {
-      const deleted = await context.models.DefinitionConfig.destroy({
+    deleteDefinitionConfig: async (_, { uuid }, { models }) => {
+      const deleted = await models.DefinitionConfig.destroy({
         where: {
           uuid,
         },
