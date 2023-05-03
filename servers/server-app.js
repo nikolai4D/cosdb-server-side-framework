@@ -7,6 +7,7 @@ const { graphqlHTTP } = require("express-graphql");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
 const { loadFilesSync } = require("@graphql-tools/load-files");
+const models = require("../db/models/models.js");
 const sequelize = require("../db/db.js");
 
 app.use(logger("dev"));
@@ -56,13 +57,13 @@ app.use(
 app.use("/api", require("../api/routes.js"));
 
 // Import the models and register them with Sequelize
-const models = {};
-const modelFiles = loadFilesSync(path.join(__dirname, "../db/models/**/*.js"));
-console.log("Model Files:", modelFiles);
-modelFiles.forEach((file) => {
-  const model = require(file).default;
-  models[model.name] = model;
-});
+// const models = {};
+// const modelFiles = loadFilesSync(path.join(__dirname, "../db/models/**/*.js"));
+// console.log("Model Files:", modelFiles);
+// modelFiles.forEach((file) => {
+//   const model = require(file).default;
+//   models[model.name] = model;
+// });
 
 // Load the GraphQL type definitions and resolvers
 const typesArray = loadFilesSync(
