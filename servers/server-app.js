@@ -56,10 +56,6 @@ app.use(
 // Api
 app.use("/api", require("../api/routes.js"));
 
-// Import the models and register them with Sequelize
-
-console.log("Models:", { models });
-
 // Load the GraphQL type definitions and resolvers
 const typesArray = loadFilesSync(
   path.resolve(__dirname, "../db/schemas/**/*.graphql")
@@ -72,9 +68,6 @@ const resolversArray = loadFilesSync(
 // Merge the type definitions and resolvers into a single executable schema
 const typeDefs = mergeTypeDefs(typesArray);
 const resolvers = mergeResolvers(resolversArray);
-console.log("Type Definitions:", typeDefs);
-console.log("Resolvers:", resolvers);
-
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // Attach the models to the GraphQL context
