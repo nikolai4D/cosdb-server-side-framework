@@ -53,6 +53,15 @@ const objectConfigResolver = {
       throw new Error("ObjectConfig not found");
     },
   },
+  ObjectConfig: {
+    parent: async (objectConfig, { parentUuid }) => {
+      const parent = await objectConfig.getDefinitionConfig();
+      if (parentUuid && parent.uuid !== parentUuid) {
+        return null;
+      }
+      return parent;
+    },
+  },
 };
 
 module.exports = objectConfigResolver;

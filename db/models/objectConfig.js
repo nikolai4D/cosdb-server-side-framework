@@ -1,6 +1,6 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../db.js");
-const DefinitionConfig = require("./DefinitionConfig.js");
+const DefinitionConfig = require("./definitionConfig.js");
 
 const ObjectConfig = sequelize.define(
   "ObjectConfig",
