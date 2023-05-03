@@ -67,6 +67,20 @@ modelFiles.forEach((file) => {
 const typesArray = loadFilesSync(
   path.resolve(__dirname, "../db/schema/**/*.graphql")
 );
+
+typesArray.forEach((typeDef) => {
+  console.log("Type definition content:", typeDef);
+});
+
+const fs = require("fs");
+const schemaPath = path.resolve(__dirname, "../db/schema");
+
+fs.readdirSync(schemaPath).forEach((file) => {
+  const filePath = path.join(schemaPath, file);
+  const content = fs.readFileSync(filePath, "utf8");
+  console.log("Schema file content:", content);
+});
+
 const resolversArray = loadFilesSync(
   path.resolve(__dirname, "../db/resolvers/**/*.js")
 );
