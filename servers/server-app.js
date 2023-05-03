@@ -4,9 +4,9 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const app = express();
 const { graphqlHTTP } = require("express-graphql");
-const { makeExecutableSchema } = require("graphql-tools");
-const { mergeTypeDefs, mergeResolvers } = require("graphql-tools/merge");
-const { loadFilesSync } = require("graphql-tools/load-files");
+import { makeExecutableSchema } from "@graphql-tools/schema";
+const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
+const { loadFilesSync } = require("@graphql-tools/load-files");
 const sequelize = require("../db/db.js");
 
 app.use(logger("dev"));
