@@ -7,6 +7,7 @@ const { graphqlHTTP } = require("express-graphql");
 const { makeExecutableSchema } = require("@graphql-tools/schema");
 const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
 const { loadFilesSync } = require("@graphql-tools/load-files");
+const { stitchSchemas } = require("@graphql-tools/stitch");
 const sequelize = require("../db/db.js");
 
 app.use(logger("dev"));
@@ -70,9 +71,14 @@ const resolversArray = loadFilesSync(
 );
 
 // Merge the type definitions and resolvers into a single executable schema
-const typeDefs = mergeTypeDefs(typesArray);
-const resolvers = mergeResolvers(resolversArray);
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+const schema = stitchSchemas({
+  subschemas: [
+    {
+      typeDefs: mergeTypeDefs(typesArray),
+      resolvers: mergeResolvers(resolversArray),
+    },
+  ],
+});
 
 // Attach the models to the GraphQL context
 app.use(
