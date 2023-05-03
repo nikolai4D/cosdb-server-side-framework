@@ -15,8 +15,8 @@ type Mutation {
   createDefinitionConfigInternalRel(
     title: String
     description: String
-    source: ID
-    target: ID
+    sourceUuid: ID
+    targetUuid: ID
   ): DefinitionConfigInternalRel
   updateDefinitionConfigInternalRel(
     uuid: ID
