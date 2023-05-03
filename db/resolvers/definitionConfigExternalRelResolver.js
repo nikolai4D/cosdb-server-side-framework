@@ -84,13 +84,13 @@ const definitionConfigExternalRelResolver = {
       const source = await DefinitionConfig.findByPk(
         definitionConfigExternalRel.source
       );
-      return source;
+      return source.uuid;
     },
     target: async (definitionConfigExternalRel) => {
       const target = await DefinitionConfig.findByPk(
         definitionConfigExternalRel.target
       );
-      return target;
+      return target.uuid;
     },
   },
 };
