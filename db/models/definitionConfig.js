@@ -24,6 +24,8 @@ const DefinitionConfig = sequelize.define(
   }
 );
 
+module.exports = DefinitionConfig;
+
 // In DefinitionConfig model
 DefinitionConfig.hasMany(DefinitionConfigExternalRel, {
   foreignKey: "source",
@@ -41,5 +43,3 @@ DefinitionConfig.hasMany(DefinitionConfigInternalRel, {
   foreignKey: "target",
   as: "targetRel",
 });
-
-module.exports = DefinitionConfig;
