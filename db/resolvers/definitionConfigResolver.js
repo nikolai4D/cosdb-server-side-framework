@@ -74,25 +74,25 @@ const definitionConfigResolver = {
   DefinitionConfig: {
     internalRelsAsSource: async (definitionConfig) => {
       const internalRelsAsSource = await DefinitionConfigInternalRel.findByPk(
-        definitionConfig.internalRelsAsSource
+        definitionConfig.internalRelsAsSource.uuid
       );
       return internalRelsAsSource;
     },
     internalRelsAsTarget: async (definitionConfig) => {
       const internalRelsAsTarget = await DefinitionConfigInternalRel.findByPk(
-        definitionConfig.internalRelsAsTarget
+        definitionConfig.internalRelsAsTarget.uuid
       );
       return internalRelsAsTarget;
     },
     externalRelsAsSource: async (definitionConfig) => {
       const externalRelsAsSource = await DefinitionConfigInternalRel.findByPk(
-        definitionConfig.externalRelsAsSource
+        definitionConfig.externalRelsAsSource.uuid
       );
       return externalRelsAsSource;
     },
     externalRelsAsTarget: async (definitionConfig) => {
       const externalRelsAsTarget = await DefinitionConfigInternalRel.findByPk(
-        definitionConfig.externalRelsAsTarget
+        definitionConfig.externalRelsAsTarget.uuid
       );
       return externalRelsAsTarget;
     },
