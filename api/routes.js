@@ -130,7 +130,7 @@ router.post("/relatedNodes", async (req, res) => {
   }
 });
 
-router.get("/:key/:id", async (req, res) => {
+router.get("/getById/:key/:id", async (req, res) => {
   const { key, id } = req.params;
 
   if (key !== "type" && key !== "instance" && key !== "object") {
