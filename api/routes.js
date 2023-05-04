@@ -136,7 +136,7 @@ router.post("/create/:key", async (req, res) => {
   const url = process.env.API_URL + key + "/create";
   console.log("url: ", url);
 
-  let response = await apiCallPost(req.body, url);
+  let response = await apiCallPost(req.body.body, url);
 
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
