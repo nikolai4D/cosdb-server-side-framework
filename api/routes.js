@@ -130,4 +130,24 @@ router.post("/relatedNodes", async (req, res) => {
   }
 });
 
+router.get("/:key/:id", async (req, res) => {
+  const { key, id } = req.params;
+
+  if (key !== "type" && key !== "instance" && key !== "object") {
+    return res.status(400).json({ error: "Invalid key" });
+  }
+
+  const url = process.env.API_URL + key + "?id=" + id;
+
+  let response = await apiCallGet(url);
+
+  console.log(response);
+
+  if ((await response.status) !== 200) {
+    return res.status(response.status).json(response.data);
+  } else {
+    return res.json(response.data);
+  }
+});
+
 module.exports = router;
