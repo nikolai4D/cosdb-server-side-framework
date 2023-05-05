@@ -2,7 +2,12 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const { apiCallPost, apiCallGet, apiCallDelete } = require("./helpers");
+const {
+  apiCallPost,
+  apiCallGet,
+  apiCallDelete,
+  apiCallPut,
+} = require("./helpers");
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 require("dotenv").config();
@@ -151,7 +156,7 @@ router.post("/update/:key", async (req, res) => {
   const url = process.env.API_URL + key + "/update";
   console.log("url: ", url);
 
-  let response = await apiCallPost(req.body.body, url);
+  let response = await apiCallPut(req.body.body, url);
 
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
