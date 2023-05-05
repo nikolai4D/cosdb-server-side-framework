@@ -145,6 +145,21 @@ router.post("/create/:key", async (req, res) => {
   }
 });
 
+router.post("/update/:key", async (req, res) => {
+  console.log("req.body", req.body);
+  const { key } = req.params;
+  const url = process.env.API_URL + key + "/update";
+  console.log("url: ", url);
+
+  let response = await apiCallPost(req.body.body, url);
+
+  if ((await response.status) !== 200) {
+    return res.status(response.status).json(response.data);
+  } else {
+    return res.json(response.data);
+  }
+});
+
 router.get("/getById/:key/:id", async (req, res) => {
   const { key, id } = req.params;
 
