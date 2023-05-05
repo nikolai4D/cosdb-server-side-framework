@@ -135,6 +135,19 @@ router.post("/relatedNodes", async (req, res) => {
   }
 });
 
+router.post("/relatedParentNodes", async (req, res) => {
+  console.log("req.body", req.body);
+  const url = process.env.API_URL + "object/getRelatedNodes";
+
+  let response = await apiCallPost(req.body.body, url);
+
+  if ((await response.status) !== 200) {
+    return res.status(response.status).json(response.data);
+  } else {
+    return res.json(response.data);
+  }
+});
+
 router.post("/create/:key", async (req, res) => {
   console.log("req.body", req.body);
   const { key } = req.params;
