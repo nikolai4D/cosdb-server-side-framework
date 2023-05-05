@@ -188,9 +188,9 @@ router.get("/getById/:key/:id", async (req, res) => {
 router.get("/deleteById/:key/:id", async (req, res) => {
   const { key, id } = req.params;
 
-  const url = process.env.API_URL + key + +"/" + id;
+  const url = process.env.API_URL + key + "/" + id;
 
-  let response = await apiCallPut(url);
+  let response = await apiCallDelete(url);
 
   console.log(response);
 
