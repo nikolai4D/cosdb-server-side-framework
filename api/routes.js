@@ -185,4 +185,20 @@ router.get("/getById/:key/:id", async (req, res) => {
   }
 });
 
+router.get("/deleteById/:key/:id", async (req, res) => {
+  const { key, id } = req.params;
+
+  const url = process.env.API_URL + key + +"/" + id;
+
+  let response = await apiCallPut(url);
+
+  console.log(response);
+
+  if ((await response.status) !== 200) {
+    return res.status(response.status).json(response.data);
+  } else {
+    return res.json(response.data);
+  }
+});
+
 module.exports = router;
