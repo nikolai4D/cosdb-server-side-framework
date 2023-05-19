@@ -1,0 +1,21 @@
+type ObjectConfig {
+  uuid: ID
+  title: String
+  description: String
+  parent: DefinitionConfig
+}
+
+type Query {
+  objectConfigs(parentUuid: ID): [ObjectConfig]
+  objectConfig(uuid: ID): ObjectConfig
+}
+
+type Mutation {
+  createObjectConfig(
+    title: String
+    description: String
+    parentUuid: ID
+  ): ObjectConfig
+  updateObjectConfig(uuid: ID, title: String, description: String): ObjectConfig
+  deleteObjectConfig(uuid: ID): Boolean
+}

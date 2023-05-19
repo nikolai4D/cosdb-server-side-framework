@@ -1,0 +1,27 @@
+type DefinitionConfigExternalRel {
+  uuid: ID
+  title: String
+  description: String
+  source: DefinitionConfig
+  target: DefinitionConfig
+}
+
+type Query {
+  definitionConfigExternalRels: [DefinitionConfigExternalRel]
+  definitionConfigExternalRel(uuid: ID!): DefinitionConfigExternalRel
+}
+
+type Mutation {
+  createDefinitionConfigExternalRel(
+    title: String
+    description: String
+    sourceUuid: ID
+    targetUuid: ID
+  ): DefinitionConfigExternalRel
+  updateDefinitionConfigExternalRel(
+    uuid: ID
+    title: String
+    description: String
+  ): DefinitionConfigExternalRel
+  deleteDefinitionConfigExternalRel(uuid: ID): Boolean
+}

@@ -1,0 +1,27 @@
+type DefinitionConfigInternalRel {
+  uuid: ID
+  title: String
+  description: String
+  source: DefinitionConfig
+  target: DefinitionConfig
+}
+
+type Query {
+  definitionConfigInternalRels: [DefinitionConfigInternalRel]
+  definitionConfigInternalRel(uuid: ID!): DefinitionConfigInternalRel
+}
+
+type Mutation {
+  createDefinitionConfigInternalRel(
+    title: String
+    description: String
+    sourceUuid: ID
+    targetUuid: ID
+  ): DefinitionConfigInternalRel
+  updateDefinitionConfigInternalRel(
+    uuid: ID
+    title: String
+    description: String
+  ): DefinitionConfigInternalRel
+  deleteDefinitionConfigInternalRel(uuid: ID): Boolean
+}
