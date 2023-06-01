@@ -3,12 +3,12 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const app = express();
-const { graphqlHTTP } = require("express-graphql");
-const { makeExecutableSchema } = require("@graphql-tools/schema");
-const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
-const { loadFilesSync } = require("@graphql-tools/load-files");
-const models = require("../db/models/models.js");
-const sequelize = require("../db/db.js");
+// const { graphqlHTTP } = require("express-graphql");
+// const { makeExecutableSchema } = require("@graphql-tools/schema");
+// const { mergeTypeDefs, mergeResolvers } = require("@graphql-tools/merge");
+// const { loadFilesSync } = require("@graphql-tools/load-files");
+// const models = require("../db/models/models.js");
+// const sequelize = require("../db/db.js");
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -57,31 +57,31 @@ app.use(
 app.use("/api", require("../api/routes.js"));
 
 // Load the GraphQL type definitions and resolvers
-const typesArray = loadFilesSync(
-  path.resolve(__dirname, "../db/schemas/**/*.graphql")
-);
+// const typesArray = loadFilesSync(
+//   path.resolve(__dirname, "../db/schemas/**/*.graphql")
+// );
 
-const resolversArray = loadFilesSync(
-  path.resolve(__dirname, "../db/resolvers/**/*.js")
-);
+// const resolversArray = loadFilesSync(
+//   path.resolve(__dirname, "../db/resolvers/**/*.js")
+// );
 
 // Merge the type definitions and resolvers into a single executable schema
-const typeDefs = mergeTypeDefs(typesArray);
-const resolvers = mergeResolvers(resolversArray);
-const schema = makeExecutableSchema({ typeDefs, resolvers });
+// const typeDefs = mergeTypeDefs(typesArray);
+// const resolvers = mergeResolvers(resolversArray);
+// const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // Attach the models to the GraphQL context
-app.use(
-  "/graphql",
-  graphqlHTTP(async (req, res) => {
-    const context = { models };
-    return {
-      schema,
-      context,
-      graphiql: true,
-    };
-  })
-);
+// app.use(
+//   "/graphql",
+//   graphqlHTTP(async (req, res) => {
+//     const context = { models };
+//     return {
+//       schema,
+//       context,
+//       graphiql: true,
+//     };
+//   })
+// );
 
 app.get("*", function (req, res, next) {
   res.sendFile(
@@ -92,20 +92,20 @@ app.get("*", function (req, res, next) {
   );
 });
 
-// app.listen(3005, () => {
-//   console.log("server is listening on port 3005");
-// });
+app.listen(3005, () => {
+  console.log("server is listening on port 3005");
+});
 
 // Sync the database and start the server
-sequelize
-  .sync()
-  .then(() => {
-    app.listen(3005, () => {
-      console.log("server is listening on port 3005");
-    });
-  })
-  .catch((err) => {
-    console.error("Unable to connect to the database:", err);
-  });
+// sequelize
+//   .sync()
+//   .then(() => {
+//     app.listen(3005, () => {
+//       console.log("server is listening on port 3005");
+//     });
+//   })
+//   .catch((err) => {
+//     console.error("Unable to connect to the database:", err);
+//   });
 
 module.exports = app;
