@@ -11,6 +11,24 @@ const {
 const bodyParser = require("body-parser");
 router.use(bodyParser.json());
 require("dotenv").config();
+const verifyRequest = require("./auth/verifyRequest.js");
+const refreshRequest = require("./auth/refreshRequest.js");
+const logoutRequest = require("./auth/logoutRequest.js");
+
+
+router.get("/verify", async (req, res) => {
+  await verifyRequest(req, res);
+});
+
+router.get("/refresh", async (req, res) => {
+  await refreshRequest(req, res);
+});
+
+router.post("/logout", async (req, res) => {
+  await logoutRequest(req, res);
+});
+
+router.use("/auth", require("./auth/authRouter.js")); //auth
 
 router.get("/auth/:viewPath", async (req, res) => {
   const { viewPath } = req.params;
