@@ -12,11 +12,11 @@ async function getModelForComp(compParentId) {
   };
 
   const components = await readModelFromParentId("components", compParentId);
-  console.log(components, "components");
+  // console.log(components, "components");
   componentModel.components = components;
 
   const component = components[0];
-  console.log(component, "component1");
+  // console.log(component, "component1");
 
   await processComponent(componentModel, component);
 
@@ -24,7 +24,7 @@ async function getModelForComp(compParentId) {
 }
 
 async function processComponent(componentModel, component) {
-  console.log(component, "component2");
+  // console.log(component, "component2");
   const componentId = component.id;
 
   if (component.value.startsWith("Organism")) {
