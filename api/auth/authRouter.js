@@ -12,10 +12,13 @@ router.use(bodyParser.json());
 router.post("/", async (req, res) => {
   console.log("auth route used");
 
+  console.log(process.env.API_URL)
+  console.log(req.body)
+
   let response = undefined;
 
   try {
-    response = await axios.post(process.env.API_BASE_URL + "/auth", req.body, {
+    response = await axios.post(process.env.API_URL + "/auth", req.body, {
       withCredentials: true,
     });
 
