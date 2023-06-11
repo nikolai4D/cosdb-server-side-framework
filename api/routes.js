@@ -120,18 +120,14 @@ router.post("/getListData", async (req, res) => {
 
 router.get("/:key/:parentId", async (req, res) => {
   const { key, parentId } = req.params;
-  // console.log("key: ", key, "parentId: ", parentId);
   if (key !== "type" && key !== "instance" && key !== "object") {
     return res.status(400).json({ error: "Invalid key" });
   }
 
   const url = process.env.API_URL + key + "?parentId=" + parentId;
 
-  // console.log("url: ", url);
-
   let response = await apiCallGet(url);
 
-  // console.log(response);
 
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
@@ -141,7 +137,6 @@ router.get("/:key/:parentId", async (req, res) => {
 });
 
 router.post("/relatedNodes", async (req, res) => {
-  // console.log("req.body", req.body);
   const url = process.env.API_URL + "typeData/getRelatedNodes";
 
   let response = await apiCallPost(req.body.body, url);
@@ -154,7 +149,6 @@ router.post("/relatedNodes", async (req, res) => {
 });
 
 router.post("/relatedParentNodes", async (req, res) => {
-  // console.log("req.body", req.body);
   const url = process.env.API_URL + "object/getRelatedNodes";
 
   let response = await apiCallPost(req.body.body, url);
@@ -167,10 +161,8 @@ router.post("/relatedParentNodes", async (req, res) => {
 });
 
 router.post("/create/:key", async (req, res) => {
-  // console.log("req.body", req.body);
   const { key } = req.params;
   const url = process.env.API_URL + key + "/create";
-  // console.log("url: ", url);
 
   let response = await apiCallPost(req.body.body, url);
 
@@ -182,10 +174,8 @@ router.post("/create/:key", async (req, res) => {
 });
 
 router.post("/createRel/:key", async (req, res) => {
-  // console.log("req.body", req.body);
   const { key } = req.params;
   const url = process.env.API_URL + key + "/create";
-  // console.log("url: ", url);
 
   let response = await apiCallPost(req.body.body, url);
 
@@ -197,10 +187,8 @@ router.post("/createRel/:key", async (req, res) => {
 });
 
 router.post("/update/:key", async (req, res) => {
-  // console.log("req.body", req.body);
   const { key } = req.params;
   const url = process.env.API_URL + key + "/update";
-  // console.log("url: ", url);
 
   let response = await apiCallPut(req.body.body, url);
 
@@ -222,8 +210,6 @@ router.get("/getById/:key/:id", async (req, res) => {
 
   let response = await apiCallGet(url);
 
-  // console.log(response);
-
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
   } else {
@@ -237,8 +223,6 @@ router.get("/deleteById/:key/:id", async (req, res) => {
   const url = process.env.API_URL + key + "/" + id;
 
   let response = await apiCallDelete(url);
-
-  // console.log(response);
 
   if ((await response.status) !== 200) {
     return res.status(response.status).json(response.data);
