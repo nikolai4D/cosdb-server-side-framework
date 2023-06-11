@@ -12,8 +12,8 @@ router.use(bodyParser.json());
 router.post("/", async (req, res) => {
   console.log("auth route used");
 
-  console.log(process.env.API_URL)
-  console.log(req.body)
+//   console.log(process.env.API_URL)
+//   console.log(req.body)
 
   let response = undefined;
 
