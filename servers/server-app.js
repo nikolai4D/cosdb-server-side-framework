@@ -92,7 +92,7 @@ app.get("*", function (req, res, next) {
   );
 });
 
-app.listen(3006, () => {
+app.listen(3005, () => {
   console.log("server is listening on port 3005");
 });
 
