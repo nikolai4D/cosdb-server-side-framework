@@ -5,7 +5,7 @@ module.exports = async function refreshRequest(req, res){
 
     console.log("refresh route used")
 
-    const response = await axios.get(process.env.API_BASE_URL + "/refresh",
+    const response = await axios.get(process.env.API_URL + "/refresh",
         {
             withCredentials: true,
             headers: { 'cookiejwt': req.cookies.jwt }

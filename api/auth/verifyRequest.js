@@ -7,7 +7,7 @@ module.exports = async function verifyRequest(req, res){
     let response
 
     try {
-        response = await axios.get(process.env.API_BASE_URL + "/verify",
+        response = await axios.get(process.env.API_URL + "/verify",
         //req.body,
         {withCredentials: true,
             headers: {'authorization': req.headers.authorization},
